@@ -10,7 +10,7 @@ Everything runs locally: a quantised 8B open model (Qwen3-8B through Ollama) on 
 
 ![Demo: a question about the notice period for a furnished flat, a follow-up about an unfurnished one, then a question in English in fast mode](docs/demo.gif)
 
-*Live run on the laptop (Qwen3-8B, careful mode, then fast mode for the last question). Each answer cites the official sheets; "Voir le texte officiel" opens the exact passage the answer used.*
+*The real answers from a live test on the laptop (Qwen3-8B; careful mode, then fast mode for the last question), replayed in the chat UI with the waiting time cut: the real search and writing times are shown under each answer (the first one includes loading the models). Each answer cites the official sheets, and "Voir le texte officiel" opens the exact passage the answer used.*
 
 ## How it works
 
