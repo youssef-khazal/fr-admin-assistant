@@ -1,5 +1,7 @@
 # Démarches FR: an assistant for French administrative procedures, with measured reliability
 
+[![tests](https://github.com/youssef-khazal/fr-admin-assistant/actions/workflows/tests.yml/badge.svg)](https://github.com/youssef-khazal/fr-admin-assistant/actions/workflows/tests.yml) ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue) ![LLM: Qwen3-8B, local](https://img.shields.io/badge/LLM-Qwen3--8B%20(local)-informational) [![MIT licence](https://img.shields.io/badge/licence-MIT-green)](LICENSE)
+
 Ask a question about a French administrative procedure (residence permit, housing benefit, driving licence exchange, change of address…) in French, English, SMS French, with typos, or in Arabic (experimental). The assistant answers **only from the official Service-Public.fr guides** and cites the pages it used.
 
 When the guides don't answer the question, it says so. It then points to the right official page, office or phone number instead of guessing.
@@ -63,7 +65,7 @@ People ask the same thing in many ways. 24 of the questions were each rewritten 
 | indirect ("Je veux continuer mes études l'année prochaine mais mon titre se termine en septembre, comment je reste en règle ?") | 0.46 | 0.79 |
 | **all 120** | **0.70** | **0.91** |
 
-Search holds up well to typos, keywords and formal phrasing; it is weakest when the user describes a situation without naming the procedure. In a conversation, a separate LLM call decides whether a new message continues the previous question ("Et pour un meublé ?") or starts a new one; it is right on 26 of 28 test cases (`data/eval/followups.yaml`).
+Search holds up well to typos, keywords and formal phrasing; it is weakest when the user describes a situation without naming the procedure. In a conversation, a separate LLM call decides whether a new message continues the previous question ("Et pour un meublé ?") or starts a new one; it is right on 26 of 28 test cases (`data/eval/followups.yaml`). A rule in code was added after the live test: a long message that shares no word with the previous one and does not start like a continuation ("et…", "c'est…") is treated as a new question without asking the LLM.
 
 ### Answers (judged against the expected facts of each question)
 163 questions across 18 categories: clean, typos, SMS, English, Arabic, abbreviations, false premises, missing situation, follow-ups, questions not covered by the guides, off-topic, emergencies and prompt injection.
@@ -79,6 +81,8 @@ Each answer is graded on three things: did the assistant pick the **right behavi
 | v6 | v5 narrowed + safety guards in code | 91.4% | 80.6% | 18.4% | 85% / 83% |
 | **v7 (final)** | v4's passages + v6's guards and glossary | **92.6%** | 81.4% | 15.3% | **89% / 87%** |
 | v7 "Rapide" | v7 without the reasoning step | – | – | – | 82% / 80% |
+
+"–" = not graded by hand. Hand grading (163 answers per version) was done for the versions that were candidates for the final one, v4 to v7; the early versions v1 and v2 and the fast mode are compared with the LLM judge only. v3 was a short intermediate test and is not reported.
 
 95% bootstrap intervals (2,000 resamples of the 163 questions) are about ±4 points for behaviour and facts and ±6 points for invented content. Paired differences, same questions resampled:
 
@@ -121,7 +125,32 @@ python scripts/build_corpus.py
 python scripts/embed.py
 uvicorn fr_admin_assistant.app:app --port 8000        # THINK=1 makes the careful mode the default
 ```
-Unit tests (no model needed, run in CI): `pip install -e .[dev] && pytest`. To reproduce the evaluation, run `scripts/eval_retrieval.py`, `scripts/run_answers.py` and `scripts/score_answers.py`.
+Unit tests (no model needed, run in CI): `pip install -e .[dev] && pytest`.
+
+To reproduce the evaluation:
+```bash
+python scripts/eval_retrieval.py                 # search setups -> results/retrieval.json
+python scripts/eval_search.py                    # final search on questions and rewordings
+python scripts/eval_followup.py                  # follow-up detector
+python scripts/run_answers.py --tag _v7 --think --judge-out judgements2_v7.jsonl   # answer + judge the 163 questions
+python scripts/score_answers.py v7=results/judgements2_v7.jsonl --manual results/manual_grades_v7.jsonl
+```
+Every result file is described in [`results/README.md`](results/README.md).
+
+## Repository layout
+```
+src/fr_admin_assistant/
+  parse.py, chunking.py   XML sheets -> clean text -> passages with their heading path
+  retrieval.py            BM25, dense search, fusion
+  pipeline.py             search + reranking, prompt, answer, checks and guards in code
+  llm.py, judge.py        Ollama client; the LLM judge
+  rewrite.py              LLM query rewriting (tested, rejected: see Search results)
+  app.py, static/         FastAPI back end and the chat page
+scripts/                  corpus building, embeddings, evaluation runs, scoring
+data/eval/                the 163 test questions, 120 rewordings, 28 follow-up cases
+results/                  every answer, judge verdict and hand grade behind the numbers above
+tests/                    unit tests (no model needed), run on every push
+```
 
 ## Data and licence
 This project uses the data **"Fiches pratiques et ressources de Service-Public.gouv.fr Particuliers"** (DILA), file `vosdroits-latest.zip`, export of 25 October 2026, from [data.gouv.fr](https://www.data.gouv.fr/datasets/fiches-pratiques-et-ressources-de-service-public-gouv-fr-particuliers), under the **Licence Ouverte / Open Licence 2.0**. *Source : Service-Public.fr / DILA — mise à jour : 25/10/2026.* The text of the guides is not modified, only split into passages. Details in [`data/README.md`](data/README.md).
