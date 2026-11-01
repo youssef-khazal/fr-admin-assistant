@@ -1,0 +1,163 @@
+{"id": "q001", "behaviour_ok": true, "facts": [true, false, true], "invented_or_wrong": [], "note": ""}
+{"id": "q002", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q003", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q004", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q005", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q006", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q007", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q008", "behaviour_ok": true, "facts": [true, false, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q009", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q010", "behaviour_ok": false, "facts": [true, false, false], "invented_or_wrong": ["says a work authorisation is needed before any work: that rule is for the 6-month-study case, not the general case"], "note": ""}
+{"id": "q011", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q012", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q013", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q014", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": [], "note": "asked which of the 3 cases applies after listing them: acceptable"}
+{"id": "q015", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q016", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q017", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q018", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["confusing sentence on students aged 25+ (says they can apply, then that they cannot)"], "note": ""}
+{"id": "q019", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q020", "behaviour_ok": false, "facts": [true, false], "invented_or_wrong": [], "note": "honest fallback, but retrieval brought only 1 passage of F17319 (no validity) and mostly Algerian certificates"}
+{"id": "q021", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q022", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q023", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": "expected clarify; gave both cases instead: acceptable"}
+{"id": "q024", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q025", "behaviour_ok": false, "facts": [false, false, false], "invented_or_wrong": [], "note": "retrieval miss (F35807 not retrieved); fallback honest but says \"les extraits fournis\""}
+{"id": "q026", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q027", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q028", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q029", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q030", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q031", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q032", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["'married to a French citizen: 4 years of marriage and 2 years of residence': the passage gives other durations"], "note": ""}
+{"id": "q033", "behaviour_ok": true, "facts": [true, false, true], "invented_or_wrong": [], "note": ""}
+{"id": "q034", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q035", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q036", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q037", "behaviour_ok": false, "facts": [false, true], "invented_or_wrong": ["gives a single 1-month appeal delay; it depends on the type of OQTF"], "note": "expected clarify; picked one case"}
+{"id": "q038", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q039", "behaviour_ok": true, "facts": [false], "invented_or_wrong": [], "note": "expected clarify; general answer with cases, acceptable"}
+{"id": "q040", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q041", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q042", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q043", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q044", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q045", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q046", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q047", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q048", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q049", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q050", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "answers the return delay first, then the amounts"}
+{"id": "q051", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q052", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q053", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q054", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q055", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q056", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q057", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q058", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q059", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q060", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q061", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q062", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q063", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q064", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q065", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q066", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q067", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q068", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q069", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": ["says choosing a médecin traitant is compulsory for parents of children under 16 (the passage says the parent chooses it)"], "note": ""}
+{"id": "q070", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q071", "behaviour_ok": false, "facts": [false, true], "invented_or_wrong": [], "note": "chunk cut before the free option; says \"le coût varie\" without saying it is free in mairie"}
+{"id": "q072", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q073", "behaviour_ok": false, "facts": [false, false, false], "invented_or_wrong": ["answers about the 'amende majorée' (30 days) instead of the initial fine (45 days); payment delay garbled"], "note": ""}
+{"id": "q074", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q075", "behaviour_ok": true, "facts": [true, false, false], "invented_or_wrong": ["'996 heures/an' instead of 964; 300 € tax is for another permit category"], "note": ""}
+{"id": "q076", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q077", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q078", "behaviour_ok": false, "facts": [true, false], "invented_or_wrong": [], "note": "second part: F21091 not retrieved; honest partial fallback"}
+{"id": "q079", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q080", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q081", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["'facing deportation' is not in the passages"], "note": ""}
+{"id": "q082", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q083", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["sends a passport request to the 'préfecture de Lyon' (it is done in a mairie)"], "note": ""}
+{"id": "q084", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": "Arabic answered in Arabic"}
+{"id": "q085", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "Arabic answered in Arabic"}
+{"id": "q086", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "Arabic answered in Arabic"}
+{"id": "q087", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": "fallback wording mentions \"les extraits\""}
+{"id": "q088", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": "fallback wording mentions \"les extraits\""}
+{"id": "q089", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": "fallback wording mentions \"les extraits\"; irrelevant sentence"}
+{"id": "q090", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["says the sheets don't give the conditions (5 years of residence was in the passages)"], "note": ""}
+{"id": "q091", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["expands SAS as 'Société à Responsabilité Limitée'; INPI/RCS steps not from the passages"], "note": ""}
+{"id": "q092", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q093", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": "general info + Adil, no legal advice: acceptable"}
+{"id": "q094", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": "expected fallback; gives the payment calendar and says to check the Caf account: acceptable"}
+{"id": "q095", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "no commercial advice, lists the partner banks of the state-guaranteed loan: acceptable"}
+{"id": "q096", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q097", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q098", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q099", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "off-topic handled, but adds an unrelated election date"}
+{"id": "q100", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q101", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q102", "behaviour_ok": false, "facts": [false, true], "invented_or_wrong": [], "note": "robbery: no emergency number first"}
+{"id": "q103", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q104", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q105", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q106", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q107", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["gives the general 964 h rule; the Algerian case is different (only the 'work sequence' sub-case was retrieved)"], "note": ""}
+{"id": "q108", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q109", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q110", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q111", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q112", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["says every residence permit holder must declare the move and that it is required to keep the permit valid"], "note": ""}
+{"id": "q113", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["says RECE holders don't need to exchange their driving licence (that rule is for student permits)"], "note": ""}
+{"id": "q114", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["says RECE holders are limited to 964 hours (they are not)"], "note": ""}
+{"id": "q115", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q116", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q117", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["presents the residence-duration exemptions (refugee, francophone) as exemptions from the language condition"], "note": ""}
+{"id": "q118", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q119", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q120", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q121", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q122", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q123", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q124", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q125", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q126", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q127", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q128", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q129", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q130", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q131", "behaviour_ok": true, "facts": [false, true], "invented_or_wrong": [], "note": "misses that Paris is a zone tendue"}
+{"id": "q132", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q133", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["lists 'licenciement' as an example of a legitimate resignation"], "note": ""}
+{"id": "q134", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q135", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["uses the public-service rule (15 jours francs, cessation des fonctions) for a private employee"], "note": ""}
+{"id": "q136", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q137", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["says the médecin traitant is compulsory in some cases (it is a choice; declaring it gives better reimbursement)"], "note": ""}
+{"id": "q138", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q139", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q140", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["gives the 'amende majorée' payment delay (30 days) instead of the 45 days of the initial fine"], "note": ""}
+{"id": "q141", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "honest partial fallback, says payment means no contest"}
+{"id": "q142", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": [], "note": ""}
+{"id": "q143", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["adds a '4 months before' filing rule that belongs to residence-permit applications, not family reunification"], "note": ""}
+{"id": "q144", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["'may have to declare their presence at the préfecture' is not in the passages"], "note": "retrieval miss (EU-citizen sheets not retrieved)"}
+{"id": "q145", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q146", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q147", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q148", "behaviour_ok": false, "facts": [false], "invented_or_wrong": [], "note": "gives rent-control info instead of saying there is no average rent"}
+{"id": "q149", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q150", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q151", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": [], "note": ""}
+{"id": "q152", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q153", "behaviour_ok": false, "facts": [false], "invented_or_wrong": [], "note": "Arabic; F31269 retrieved but the wrong passages; fallback"}
+{"id": "q154", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": "Arabic, some broken words"}
+{"id": "q155", "behaviour_ok": true, "facts": [false], "invented_or_wrong": [], "note": "Arabic, misses age and language conditions, some garbled words"}
+{"id": "q156", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q157", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q158", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q159", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q160", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["tells the user to update the address with the MSA (wrong sheets retrieved)"], "note": "Arabic; retrieval miss (F35807)"}
+{"id": "q161", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q162", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}
+{"id": "q163", "behaviour_ok": true, "facts": [true], "invented_or_wrong": [], "note": ""}

@@ -1,0 +1,23 @@
+# docker compose up  ->  chat page on http://localhost:8000
+# First time only: docker compose exec ollama ollama pull qwen3:8b
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama:/root/.ollama
+    # GPU (NVIDIA): uncomment
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+  app:
+    build: .
+    depends_on: [ollama]
+    ports: ["8000:8000"]
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+      - hf-cache:/root/.cache/huggingface
+volumes:
+  ollama:
+  hf-cache:

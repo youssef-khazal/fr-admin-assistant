@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Démarches · assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500&family=IBM+Plex+Mono:wght@400&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: a history sidebar on the left, one reading column for the conversation; sources sit under each
+   answer like footnotes, with the exact official text one click away. */
+:root {
+  --paper: #f7f5f0; --card: #ffffff; --ink: #1d2320; --muted: #5d655f; --line: #dfdbd2;
+  --accent: #2f6b55; --accent-soft: rgba(47,107,85,.09); --warn: #9a5b12; --warn-soft: rgba(154,91,18,.10);
+  --danger: #a3302a; --danger-soft: rgba(163,48,42,.09); --side: #efece5;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", "Segoe UI", system-ui, sans-serif;
+  --display: "Fraunces", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #151917; --card: #1d2320; --ink: #e8ebe7; --muted: #9aa49d; --line: #2f3833; --side: #111412;
+    --accent: #6cc3a0; --accent-soft: rgba(108,195,160,.12); --warn: #e0a656; --warn-soft: rgba(224,166,86,.12);
+    --danger: #ef8a83; --danger-soft: rgba(239,138,131,.12); color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 16px/1.6 var(--sans); display: flex; }
+button { font-family: var(--sans); }
+
+/* sidebar */
+aside { width: 270px; flex: none; background: var(--side); border-right: 1px solid var(--line); display: flex; flex-direction: column; height: 100vh; position: sticky; top: 0; }
+aside .head { padding: 18px 14px 10px; display: grid; gap: 10px; }
+aside .new { width: 100%; text-align: start; }
+aside h2 { margin: 6px 14px 4px; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.chats { flex: 1; overflow: auto; padding: 0 8px 12px; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 2px; }
+.chat-item { display: flex; align-items: center; gap: 4px; border-radius: 8px; min-width: 0; }
+.chat-item button.open { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); text-align: start; padding: 7px 8px; font-size: 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-item.active button.open, .chat-item button.open:hover { background: var(--accent-soft); }
+.chat-item button.del { border: 0; background: transparent; color: var(--muted); cursor: pointer; border-radius: 6px; padding: 4px 7px; visibility: hidden; }
+.chat-item:hover button.del, .chat-item button.del:focus-visible { visibility: visible; }
+.chats .empty { color: var(--muted); font-size: 13px; padding: 6px 8px; }
+aside .note { padding: 10px 14px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.menu { display: none; }
+
+.page { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 100vh; }
+header, main, footer, .composer { width: 100%; max-width: 820px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+header { padding-block: 26px 10px; }
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.title { display: flex; gap: 10px; align-items: center; }
+h1 { font: 600 30px/1.1 var(--display); margin: 0; letter-spacing: -.01em; }
+.sub { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
+.sub code { font-family: var(--mono); font-size: 13px; }
+.tools { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { border: 0; background: transparent; color: var(--muted); font-size: 13px; padding: 6px 12px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.ghost { border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 13px; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.ghost:hover, .seg button:hover, .ghost:focus-visible, .seg button:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.mode-note { color: var(--muted); font-size: 12.5px; margin: 6px 0 0; }
+
+main { flex: 1; display: flex; flex-direction: column; gap: 20px; padding-block: 16px 24px; }
+.intro { display: grid; gap: 14px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.intro p { margin: 0; max-width: 62ch; }
+.examples, .choices, .suggest { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 7px 13px; font-size: 14px; cursor: pointer; text-align: start; }
+.chip:hover, .chip:focus-visible { border-color: var(--accent); outline: none; }
+.suggest .chip { font-size: 13px; padding: 5px 11px; color: var(--muted); }
+.suggest .chip:hover { color: var(--accent); }
+
+.msg { display: grid; gap: 10px; }
+.user { justify-self: end; max-width: 85%; background: var(--accent); color: var(--card); padding: 10px 14px; border-radius: 14px 14px 4px 14px; white-space: pre-wrap; }
+.bot { background: var(--card); border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; padding: 16px 18px; display: grid; gap: 12px; }
+.bot .text { white-space: pre-wrap; }
+.bot .text[dir="rtl"], .user[dir="rtl"] { font-family: "IBM Plex Sans Arabic", var(--sans); }
+.svc { font-weight: 600; }
+.bot .text a { color: var(--accent); text-underline-offset: 2px; }
+.cite { display: inline-block; min-width: 1.5em; padding: 0 4px; margin: 0 1px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); font: 500 12px/1.6 var(--mono); text-decoration: none; vertical-align: 1px; text-align: center; }
+.badge { justify-self: start; font: 500 12px var(--mono); letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
+.badge.fallback { background: var(--warn-soft); color: var(--warn); }
+.badge.emergency { background: var(--danger-soft); color: var(--danger); }
+.badge.clarify { background: var(--accent-soft); color: var(--accent); }
+.badge.stopped { background: var(--warn-soft); color: var(--warn); }
+.sources { display: grid; gap: 10px; border-top: 1px dashed var(--line); padding-top: 12px; }
+.sources h3, .contacts h3 { margin: 0; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.source { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 14px; }
+.source .n { font: 500 12px var(--mono); color: var(--accent); padding-top: 2px; }
+.source a { color: var(--ink); font-weight: 500; }
+.source .meta { grid-column: 2; color: var(--muted); font-size: 13px; }
+.source .meta span { display: block; }
+.source details { grid-column: 2; font-size: 13.5px; }
+.source summary { cursor: pointer; color: var(--accent); font-size: 13px; width: fit-content; }
+.excerpt { margin: 8px 0 0; padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; white-space: pre-wrap; color: var(--ink); }
+.excerpt b { display: block; font: 500 12px var(--mono); color: var(--muted); margin-bottom: 4px; }
+.contacts { display: grid; gap: 8px; background: var(--warn-soft); border-radius: 10px; padding: 12px 14px; }
+.contact { font-size: 14px; }
+.contact b { font-weight: 600; }
+.contact .d { color: var(--muted); white-space: pre-wrap; display: block; }
+.timing { font: 12px var(--mono); color: var(--muted); }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.actions button { border: 1px solid var(--line); background: transparent; border-radius: 8px; padding: 2px 9px; cursor: pointer; font-size: 13px; color: var(--muted); }
+.actions button:hover, .actions button:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.actions .thanks { font: 12px var(--mono); color: var(--muted); }
+.progress { display: grid; gap: 6px; color: var(--muted); font-size: 14px; }
+.progress .row { display: flex; gap: 10px; align-items: center; }
+.progress .found { font-size: 13px; }
+.live { white-space: pre-wrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1s ease-in-out infinite; flex: none; }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+
+.composer { position: sticky; bottom: 0; background: linear-gradient(transparent, var(--paper) 30%); padding-block: 16px max(14px, env(safe-area-inset-bottom)); }
+form { display: flex; gap: 8px; align-items: flex-end; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+textarea { flex: 1; min-width: 0; border: 0; resize: none; background: transparent; color: var(--ink); font: 16px/1.5 var(--sans); padding: 6px 8px; max-height: 160px; }
+textarea:focus { outline: none; }
+form:focus-within { border-color: var(--accent); }
+button.send { border: 0; background: var(--accent); color: var(--card); font-size: 15px; font-weight: 500; border-radius: 10px; padding: 9px 16px; cursor: pointer; }
+button.send.stop { background: var(--danger); }
+footer { padding-block: 0 18px; color: var(--muted); font-size: 12.5px; }
+
+@media (max-width: 860px) {
+  aside { position: fixed; left: 0; top: 0; z-index: 20; transform: translateX(-100%); transition: transform .2s; box-shadow: 0 0 40px rgba(0,0,0,.2); }
+  body.side-open aside { transform: none; }
+  .menu { display: inline-flex; }
+  .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 10; }
+  body.side-open .scrim { display: block; }
+}
+</style>
+</head>
+<body>
+<aside id="side" aria-label="Conversations">
+  <div class="head"><button class="ghost new" id="new" type="button">＋ Nouvelle conversation</button></div>
+  <h2>Historique</h2>
+  <nav class="chats" id="chats"></nav>
+  <div class="note">Les conversations sont enregistrées seulement dans ce navigateur, sur cet ordinateur.</div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<div class="page">
+<header>
+  <div class="top">
+    <div>
+      <div class="title"><button class="ghost menu" id="menu" type="button" aria-label="Historique">☰</button><h1>Démarches</h1></div>
+      <p class="sub">Réponses tirées uniquement des fiches officielles Service-Public.fr · données du <code id="date">…</code></p>
+    </div>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Mode de réponse">
+        <button type="button" id="mode-careful" aria-pressed="true">Précis</button>
+        <button type="button" id="mode-fast" aria-pressed="false">Rapide</button>
+      </div>
+    </div>
+  </div>
+  <p class="mode-note" id="mode-note"></p>
+</header>
+
+<main id="log"></main>
+
+<div class="composer">
+  <form id="form">
+    <textarea id="q" rows="1" placeholder="Votre question…" aria-label="Votre question" dir="auto"></textarea>
+    <button class="send" id="send" type="submit">Envoyer</button>
+  </form>
+</div>
+<footer>Information générale, pas un conseil juridique. Vérifiez toujours sur la fiche officielle citée. Source : Service-Public.fr / DILA, Licence Ouverte 2.0. Rien n'est envoyé ailleurs que sur cet ordinateur.</footer>
+</div>
+
+<template id="intro-tpl">
+  <section class="intro" id="intro">
+    <p>Posez votre question sur une démarche en France (titre de séjour, logement, travail, impôts, papiers…), en français, en anglais ou en arabe. Chaque réponse cite les fiches officielles utilisées, et vous pouvez lire le texte officiel exact.</p>
+    <div class="examples">
+      <button class="chip">Comment renouveler mon titre de séjour étudiant ?</button>
+      <button class="chip">Je veux quitter mon appartement, quel préavis ?</button>
+      <button class="chip">Can a non-EU student work in France?</button>
+      <button class="chip" dir="rtl">كم يكلف جواز السفر الفرنسي لشخص بالغ؟</button>
+      <button class="chip">Mon propriétaire me demande 3 mois de dépôt de garantie, c'est normal ?</button>
+    </div>
+  </section>
+</template>
+
+<script>
+const $ = id => document.getElementById(id);
+const log = $("log"), form = $("form"), q = $("q"), send = $("send");
+const LABELS = {
+  fallback: {fr: "Pas de réponse précise dans les fiches", en: "No precise answer in the official sheets", ar: "لا توجد إجابة دقيقة في الصفحات الرسمية"},
+  emergency: {fr: "Urgence", en: "Emergency", ar: "طوارئ"},
+  clarify: {fr: "Précisez votre situation", en: "Tell me your situation", ar: "حدّد وضعك"},
+  followup: {fr: "suite de la question précédente", en: "follow-up of the previous question", ar: "متابعة للسؤال السابق"},
+  sources: {fr: "Fiches officielles", en: "Official sheets", ar: "الصفحات الرسمية"},
+  contacts: {fr: "Qui contacter", en: "Who to contact", ar: "بمن تتصل"},
+  updated: {fr: "mise à jour", en: "updated", ar: "تحديث"},
+  excerpts: {fr: "Voir le texte officiel", en: "Show the official text", ar: "عرض النص الرسمي"},
+  search: {fr: "recherche", en: "search", ar: "البحث"},
+  writing: {fr: "rédaction", en: "writing", ar: "الكتابة"},
+  fast: {fr: "mode rapide", en: "fast mode", ar: "الوضع السريع"},
+  copy: {fr: "Copier", en: "Copy", ar: "نسخ"},
+  copied: {fr: "Copié", en: "Copied", ar: "تم النسخ"},
+  good: {fr: "Réponse utile", en: "Helpful answer", ar: "إجابة مفيدة"},
+  bad: {fr: "Réponse fausse ou inutile", en: "Wrong or unhelpful answer", ar: "إجابة خاطئة أو غير مفيدة"},
+  why: {fr: "Qu'est-ce qui ne va pas ?", en: "What is wrong?", ar: "ما المشكلة؟"},
+  wrong: {fr: "Faux", en: "Wrong", ar: "خاطئة"},
+  incomplete: {fr: "Incomplet", en: "Incomplete", ar: "ناقصة"},
+  unclear: {fr: "Pas clair", en: "Unclear", ar: "غير واضحة"},
+  other: {fr: "Autre", en: "Other", ar: "أخرى"},
+  thanks: {fr: "merci, noté sur cet ordinateur", en: "thanks, saved on this computer", ar: "شكرًا، تم الحفظ على هذا الجهاز"},
+};
+const MODE_NOTE = {
+  true: "Précis : le modèle vérifie votre situation et les fiches avant de répondre (1 à 2 minutes). C'est le mode évalué.",
+  false: "Rapide : réponse en 15 à 30 secondes, sans étape de vérification — un peu moins prudente.",
+};
+const STAGES = {
+  search: "Recherche dans les fiches officielles…",
+  writing: "Lecture des fiches et rédaction de la réponse…",
+  checking: "Vérification des chiffres, nouvelle rédaction…",
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const isAr = t => /[؀-ۿ]/.test(t);
+
+/* ---------- storage (this browser only; the page works without it) ---------- */
+const STORE = "demarches.chats.v1", MODE = "demarches.think";
+function loadChats() { try { return JSON.parse(localStorage.getItem(STORE) || "[]"); } catch { return []; } }
+function saveChats(list) { try { localStorage.setItem(STORE, JSON.stringify(list.slice(0, 50))); } catch {} }
+let chats = loadChats();
+let chat = null;            // the open conversation: {id, title, updated, msgs: [{role, text} | {role:"bot", r}]}
+let think = true, busy = false, controller = null;
+try { think = localStorage.getItem(MODE) !== "0"; } catch {}
+
+// questions and answers sent back to the server as context: a question whose answer was stopped or failed is
+// left out, so that turns[i] and history[i] stay paired; the last question (being answered) is kept
+function pairs(c) {
+  const out = [];
+  c.msgs.forEach((m, i) => {
+    if (m.role !== "user") return;
+    const next = c.msgs[i + 1];
+    if (!next) out.push({q: m.text});
+    else if (next.r) out.push({q: m.text, a: next.r.answer});
+  });
+  return out;
+}
+function turnsOf(c) { return pairs(c).map(p => p.q); }
+function historyOf(c) { return pairs(c).filter(p => p.a !== undefined).map(p => p.a); }
+
+function persist() {
+  if (!chat || !chat.msgs.length) return;
+  chat.updated = Date.now();
+  chats = [chat, ...chats.filter(c => c.id !== chat.id)];
+  saveChats(chats);
+  drawList();
+}
+
+function drawList() {
+  const box = $("chats");
+  if (!chats.length) { box.innerHTML = `<div class="empty">Aucune conversation pour l'instant.</div>`; return; }
+  box.innerHTML = chats.map(c => `<div class="chat-item${chat && c.id === chat.id ? " active" : ""}" data-id="${c.id}">
+      <button class="open" type="button" dir="auto" title="${esc(c.title)}">${esc(c.title)}</button>
+      <button class="del" type="button" aria-label="Supprimer">✕</button></div>`).join("");
+  box.querySelectorAll(".chat-item").forEach(el => {
+    el.querySelector(".open").addEventListener("click", () => openChat(el.dataset.id));
+    el.querySelector(".del").addEventListener("click", () => {
+      chats = chats.filter(c => c.id !== el.dataset.id); saveChats(chats);
+      if (chat && chat.id === el.dataset.id) newChat(); else drawList();
+    });
+  });
+}
+
+function showIntro() {
+  log.innerHTML = $("intro-tpl").innerHTML;
+  log.querySelectorAll("#intro .chip").forEach(b => b.addEventListener("click", () => ask(b.textContent)));
+}
+
+function newChat() {
+  if (busy) return;
+  chat = {id: String(Date.now()), title: "", updated: Date.now(), msgs: []};
+  showIntro(); drawList(); closeSide(); q.focus();
+}
+
+function openChat(id) {
+  if (busy) return;
+  const c = chats.find(x => x.id === id);
+  if (!c) return;
+  chat = c; log.innerHTML = "";
+  c.msgs.forEach((m, i) => {
+    if (m.role === "user") userBubble(m.text);
+    else if (m.r) render(m.r, null, turnsOf({msgs: c.msgs.slice(0, i)}));
+    else bubble(`<div class="bot"><span class="badge stopped">${esc(m.text || "Réponse arrêtée")}</span></div>`);
+  });
+  drawList(); closeSide();
+}
+
+/* ---------- mode switch ---------- */
+function setMode(t) {
+  think = t;
+  $("mode-careful").setAttribute("aria-pressed", t); $("mode-fast").setAttribute("aria-pressed", !t);
+  $("mode-note").textContent = MODE_NOTE[t];
+  try { localStorage.setItem(MODE, t ? "1" : "0"); } catch {}
+}
+$("mode-careful").addEventListener("click", () => setMode(true));
+$("mode-fast").addEventListener("click", () => setMode(false));
+
+/* ---------- sidebar on small screens ---------- */
+function closeSide() { document.body.classList.remove("side-open"); }
+$("menu").addEventListener("click", () => document.body.classList.toggle("side-open"));
+$("scrim").addEventListener("click", closeSide);
+$("new").addEventListener("click", newChat);
+
+/* ---------- rendering ---------- */
+function bubble(html) {
+  const d = document.createElement("div");
+  d.className = "msg"; d.innerHTML = html;
+  log.appendChild(d);
+  d.scrollIntoView({behavior: "smooth", block: "end"});
+  return d;
+}
+function userBubble(text) { return bubble(`<div class="user" dir="${isAr(text) ? "rtl" : "auto"}">${esc(text)}</div>`); }
+
+function answerHtml(r, key) {
+  const refs = r.refs || {};
+  return esc(r.answer)
+    // "[Service en ligne] Title : https://..." -> a link with the title
+    .replace(/\[Service en ligne\]\s*([^:\n]{3,140}?)\s*:\s*(https?:\/\/[^\s<)\]]+)/g, (m, t, u) => { const tail = (u.match(/[.,;:]+$/) || [""])[0]; u = u.slice(0, u.length - tail.length); return `<a class="svc" href="${u}" target="_blank" rel="noopener">${t.trim()} ↗</a>${tail}`; })
+    // remaining bare links -> short clickable domain
+    .replace(/(^|[\s(])(https?:\/\/[^\s<)\]]+)/g, (m, pre, u) => { const tail = (u.match(/[.,;:]+$/) || [""])[0]; u = u.slice(0, u.length - tail.length); return `${pre}<a href="${u}" target="_blank" rel="noopener">${u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]} ↗</a>${tail}`; })
+    // [n] -> footnote chip of the sheet it comes from; repeated chips for the same sheet are merged
+    .replace(/\s*\[(\d+)\]/g, (m, n) => refs[n] ? `<a class="cite" data-k="${refs[n]}" href="#src-${key}-${refs[n]}">${refs[n]}</a>` : "")
+    .replace(/(<a class="cite" data-k="(\d+)"[^>]*>\d+<\/a>)(<a class="cite" data-k="\2"[^>]*>\d+<\/a>)+/g, "$1")
+    .replace(/\[Service en ligne\]\s*/g, "")
+    .replace(/\[Contacts?\]|\[contact\]/gi, "");
+}
+
+function plainText(r) {
+  const refs = r.refs || {};
+  let t = r.answer.replace(/\s*\[(\d+)\]/g, (m, n) => refs[n] ? ` [${refs[n]}]` : "").replace(/\[(\d+)\](\s*\[\1\])+/g, "[$1]");
+  if (r.sources.length) t += "\n\n" + r.sources.map((s, k) => `[${k + 1}] ${s.title} — ${s.url}`).join("\n");
+  return t;
+}
+
+let keySeq = 0;
+function render(r, target, askedTurns) {
+  const L = k => LABELS[k][r.lang] || LABELS[k].fr;
+  const key = ++keySeq;
+  let html = `<div class="bot">`;
+  if (["fallback", "emergency", "clarify"].includes(r.behaviour)) html += `<span class="badge ${r.behaviour}">${L(r.behaviour)}</span>`;
+  html += `<div class="text" dir="${r.lang === "ar" ? "rtl" : "auto"}">${answerHtml(r, key)}</div>`;
+  if (r.choices && r.choices.length) html += `<div class="choices">${r.choices.map(c => `<button class="chip choice" type="button">${esc(c)}</button>`).join("")}</div>`;
+  if (r.contacts && r.contacts.length) html += `<div class="contacts"><h3>${L("contacts")}</h3>${r.contacts.map(c => `<div class="contact"><b>${esc(c.title)}</b><span class="d">${esc(c.details)}</span></div>`).join("")}</div>`;
+  if (r.sources.length) html += `<div class="sources"><h3>${L("sources")}</h3>${r.sources.map((s, k) => `
+      <div class="source" id="src-${key}-${k + 1}"><span class="n">[${k + 1}]</span>
+        <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)} ↗</a>
+        <span class="meta">${(s.paths || (s.path ? [s.path] : [])).map(p => `<span>${esc(p)}</span>`).join("")}<span>${L("updated")} ${esc(s.modified)}</span></span>
+        ${s.excerpts && s.excerpts.length ? `<details><summary>${L("excerpts")}</summary>${s.excerpts.map(e => `<div class="excerpt">${e.path ? `<b>${esc(e.path)}</b>` : ""}${esc(e.text)}</div>`).join("")}</details>` : ""}
+      </div>`).join("")}</div>`;
+  if (r.suggestions && r.suggestions.length) html += `<div class="suggest">${r.suggestions.map(s => `<button class="chip next" type="button" dir="auto">${esc(s)}</button>`).join("")}</div>`;
+  const t = r.timing_ms || {search: 0, answer: 0};
+  html += `<div class="foot"><span class="timing">${r.followup ? "↪ " + L("followup") + " · " : ""}${r.fast ? L("fast") + " · " : ""}${L("search")} ${(t.search / 1000).toFixed(1)} s · ${L("writing")} ${(t.answer / 1000).toFixed(1)} s</span>
+    <span class="actions"><button type="button" class="copy">${L("copy")}</button>${r.vote ? `<span class="thanks">${L("thanks")}</span>` : `<button type="button" data-v="up" aria-label="${L("good")}" title="${L("good")}">👍</button><button type="button" data-v="down" aria-label="${L("bad")}" title="${L("bad")}">👎</button>`}</span></div></div>`;
+  const d = target ? (target.innerHTML = html, target) : bubble(html);
+  d.querySelectorAll(".choice, .next").forEach(b => b.addEventListener("click", () => ask(b.textContent)));
+  d.querySelector(".copy").addEventListener("click", e => {
+    const done = () => { e.target.textContent = L("copied"); setTimeout(() => e.target.textContent = L("copy"), 1500); };
+    navigator.clipboard ? navigator.clipboard.writeText(plainText(r)).then(done, () => {}) : done();
+  });
+  const actions = d.querySelector(".actions");
+  const vote = (v, reason) => {
+    fetch("/api/feedback", {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({turns: askedTurns, answer: r.answer, vote: v, reason: reason || ""})}).catch(() => {});
+    r.vote = v; persist();
+    actions.querySelectorAll("[data-v], .why").forEach(x => x.remove());
+    actions.insertAdjacentHTML("beforeend", `<span class="thanks">${L("thanks")}</span>`);
+  };
+  actions.querySelector("[data-v=up]")?.addEventListener("click", () => vote("up"));
+  actions.querySelector("[data-v=down]")?.addEventListener("click", () => {
+    actions.querySelectorAll("[data-v]").forEach(x => x.remove());
+    actions.insertAdjacentHTML("beforeend", `<span class="why timing">${L("why")}</span>` +
+      ["wrong", "incomplete", "unclear", "other"].map(k => `<button type="button" class="why" data-r="${k}">${L(k)}</button>`).join(""));
+    actions.querySelectorAll("button.why").forEach(b => b.addEventListener("click", () => vote("down", b.dataset.r)));
+  });
+  return d;
+}
+
+/* ---------- asking ---------- */
+async function ask(text) {
+  if (busy) return;
+  if (!chat) newChat();
+  busy = true; closeSide();
+  document.getElementById("intro")?.remove();
+  chat.msgs.push({role: "user", text});
+  if (!chat.title) chat.title = text.slice(0, 70);
+  const turns = turnsOf(chat), history = historyOf(chat);
+  userBubble(text);
+  q.value = ""; q.style.height = "auto";
+  send.textContent = "Arrêter"; send.classList.add("stop");
+  const box = bubble(`<div class="bot"><div class="progress"><div class="row"><span class="dot"></span><span class="stage">${STAGES.search}</span><span class="elapsed timing">0 s</span></div><div class="found"></div></div><div class="text live" dir="auto"></div></div>`);
+  const stage = box.querySelector(".stage"), found = box.querySelector(".found"), live = box.querySelector(".live"), elapsed = box.querySelector(".elapsed");
+  const t0 = Date.now(), tick = setInterval(() => { elapsed.textContent = Math.round((Date.now() - t0) / 1000) + " s"; }, 1000);
+  controller = new AbortController();
+  try {
+    const res = await fetch("/api/ask/stream", {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({turns, history, think}), signal: controller.signal});
+    if (!res.ok) throw new Error((await res.json()).detail || res.status);
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", result = null;
+    while (true) {
+      const {value, done} = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, {stream: true});
+      let i;
+      while ((i = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, i); buf = buf.slice(i + 1);
+        if (!line.trim()) continue;
+        const ev = JSON.parse(line);
+        if (ev.type === "stage") stage.textContent = STAGES[ev.stage] || stage.textContent;
+        else if (ev.type === "found") found.textContent = `${ev.followup ? "↪ suite de la question précédente · " : ""}${ev.passages} passages des fiches officielles : ${ev.sheets.join(" · ")}`;
+        else if (ev.type === "thinking") stage.textContent = `Le modèle vérifie votre situation et les fiches… (${Math.round(ev.chars / 5)} mots de réflexion)`;
+        else if (ev.type === "answer") { live.textContent = ev.text.replace(/\s*\[\d+\]/g, ""); live.dir = isAr(ev.text) ? "rtl" : "auto"; }
+        else if (ev.type === "error") throw new Error(ev.detail);
+        else if (ev.type === "done") result = ev;
+      }
+    }
+    if (!result) throw new Error("réponse interrompue");
+    delete result.type;
+    result.fast = !think;
+    chat.msgs.push({role: "bot", r: result});
+    render(result, box, turns);
+    // bring the start of the new answer into view (it may be below the fold after a long previous answer)
+    const top = box.getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.6) box.scrollIntoView({behavior: "smooth", block: "start"});
+  } catch (err) {
+    const stopped = err.name === "AbortError";
+    const msg = stopped ? "Réponse arrêtée" : `Erreur : ${String(err.message || err)}`;
+    chat.msgs.push({role: "bot", text: msg});
+    box.innerHTML = `<div class="bot"><span class="badge ${stopped ? "stopped" : "fallback"}">${esc(msg)}</span>${stopped ? "" : `<div class="text">La réponse n'a pas pu être produite. Vérifiez qu'Ollama est lancé, puis réessayez.</div>`}</div>`;
+  } finally {
+    clearInterval(tick); controller = null;
+    busy = false; send.textContent = "Envoyer"; send.classList.remove("stop"); q.focus();
+    persist();
+  }
+}
+
+fetch("/health").then(r => r.json()).then(h => { $("date").textContent = (h.data_export_date || "").slice(0, 10); }).catch(() => {});
+q.addEventListener("input", () => { q.style.height = "auto"; q.style.height = q.scrollHeight + "px"; });
+q.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  if (busy) { controller?.abort(); return; }   // the button is "Arrêter" while an answer is being written
+  if (q.value.trim()) ask(q.value.trim());
+});
+setMode(think);
+newChat();
+</script>
+</body>
+</html>

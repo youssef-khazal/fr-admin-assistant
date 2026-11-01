@@ -1,0 +1,17 @@
+/data/raw/
+/data/extracted/
+/data/processed/
+/data/index/
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+/results/ui_log.jsonl
+/results/_dbg*
+/results/ui_feedback.jsonl
+# working notes and superseded runs (first judge, intermediate v3) stay local
+/results/night_notes.md
+/results/judgements.jsonl
+/results/judgements_v*.jsonl
+/results/scores.json
+/results/answers_v3.jsonl

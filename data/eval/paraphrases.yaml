@@ -1,0 +1,197 @@
+# Robustness test: the same question written in different ways.
+# Each variant keeps the expected behaviour, gold sheets and facts of its base question in questions.yaml.
+# The assistant is robust if every variant (1) finds the gold sheet, (2) gets the right behaviour and
+# (3) gives the same key facts as the base question.
+# Styles: formal / spoken / indirect (need described, no keyword) / keyword-only / misspelled.
+
+- base: q001
+  variants:
+    - Quelle est la procédure à suivre pour obtenir le renouvellement de mon titre de séjour portant la mention étudiant ?
+    - ma carte de séjour étudiant va expirer, je fais quoi pour la refaire ?
+    - Je veux continuer mes études l'année prochaine mais mon titre se termine en septembre, comment je reste en règle ?
+    - renouvellement titre séjour étudiant démarche
+    - comment on renouvelle un titre de sejour etudiant svp
+
+- base: q006
+  variants:
+    - Quel est le tarif pour renouveler une carte de séjour pluriannuelle étudiant ?
+    - ça coûte combien de refaire ma carte étudiant pluriannuelle ?
+    - Je dois acheter combien de timbres fiscaux pour renouveler mon titre étudiant de plusieurs années ?
+    - prix renouvellement titre séjour étudiant pluriannuel
+    - combien sa coute le renouvelement du titre etudiant pluriannuel
+
+- base: q009
+  variants:
+    - Quelle est la durée annuelle maximale de travail autorisée pour un étudiant étranger hors Union européenne ?
+    - je suis étudiant étranger, je peux bosser combien d'heures max ?
+    - Je viens du Liban pour mes études et on me propose un job à côté, il y a une limite d'heures ?
+    - étudiant non européen heures de travail maximum par an
+    - combien d'heure un etudiant etrenger peut travailler par ans
+
+- base: q013
+  variants:
+    - Un étudiant ressortissant de l'Union européenne peut-il exercer une activité salariée pendant ses études en France ?
+    - je suis italien et je fais mes études à Paris, j'ai le droit de travailler ?
+    - Je suis belge, en échange à Toulouse, et un café veut m'embaucher le week-end. Il me faut un papier ?
+    - étudiant européen travailler en France autorisation
+    - je suis etudiant espagnol est ce que je peu travailler en france
+
+- base: q014
+  variants:
+    - Un étudiant de nationalité non européenne titulaire d'un titre de séjour étudiant peut-il percevoir l'aide personnalisée au logement ?
+    - je suis étudiant tunisien, est-ce que la caf peut m'aider pour mon loyer ?
+    - Je loue un studio pour mes études, je viens d'Algérie, est-ce que je peux avoir une aide pour payer le loyer ?
+    - APL étudiant étranger hors UE conditions
+    - etudiant libanais droit apl ou pas
+
+- base: q017
+  variants:
+    - La demande d'aide au logement par un enfant étudiant a-t-elle une incidence sur les prestations familiales de ses parents ?
+    - si je prends les apl, mes parents ils perdent leurs allocs ?
+    - Ma mère touche des allocations pour moi et mon frère, et je voudrais demander une aide pour mon logement étudiant. Il y a un risque pour elle ?
+    - APL étudiant impact allocations familiales parents
+    - si je demande l'apl est ce que mes parent perdent les allocation familial
+
+- base: q019
+  variants:
+    - Quel titre de séjour permet à un diplômé étranger de master de rester en France pour rechercher un emploi ?
+    - j'ai fini mon master ici, quel papier je demande pour rester chercher un taf ?
+    - Je viens d'avoir mon diplôme de master à Grenoble et je n'ai pas encore trouvé de travail. Je peux rester en France le temps de chercher ?
+    - titre de séjour après master recherche d'emploi
+    - apres mon master en france quel titre de sejour pour cherché du travail
+
+- base: q022
+  variants:
+    - Un diplômé de master en France reparti dans son pays depuis deux ans peut-il encore solliciter le titre de séjour recherche d'emploi ?
+    - j'ai mon master français depuis 2 ans et je suis rentré au pays, c'est trop tard pour revenir chercher du travail ?
+    - J'ai fini mes études à Lille en 2024 et je suis reparti au Maroc. Je voudrais revenir en France chercher un emploi, j'ai encore le droit ?
+    - délai demande titre recherche d'emploi diplômé reparti à l'étranger
+    - jai eu mon master il y a 2 ans je suis repartie chez moi je peux encore demander le titre recherche demploi
+
+- base: q024
+  variants:
+    - Que représente le récépissé de demande de titre de séjour ?
+    - c'est quoi ce papier récépissé qu'on m'a donné à la préfecture ?
+    - La préfecture m'a remis un document provisoire en attendant ma carte. À quoi il sert exactement ?
+    - récépissé titre de séjour définition
+    - cest quoi un recepissé de titre de sejour
+
+- base: q027
+  variants:
+    - Un étudiant étranger titulaire d'un titre de séjour étudiant est-il tenu d'échanger son permis de conduire étranger ?
+    - je suis étudiant algérien, je dois changer mon permis contre un permis français ?
+    - Je fais mes études en France avec un titre étudiant et je conduis avec mon permis sénégalais. Est-ce que c'est un problème ?
+    - échange permis étranger étudiant obligatoire
+    - etudiant marocain echanger permis de conduir obligatoir
+
+- base: q028
+  variants:
+    - Quelle est la durée de validité en France d'un permis de conduire non européen pour un étranger qui s'installe avec un titre de séjour salarié ?
+    - je viens d'arriver en France pour bosser, je peux rouler combien de temps avec mon permis algérien ?
+    - J'ai été embauché à Marseille et je me suis installé ici le mois dernier, avec mon permis tunisien. Je dois faire quelque chose ?
+    - permis étranger non européen durée validité nouveau résident
+    - combien de temp je peux conduire avec mon permi tunisien en france
+
+- base: q030
+  variants:
+    - Quelles sont les conditions requises pour acquérir la nationalité française par naturalisation ?
+    - il faut quoi pour avoir la nationalité française ?
+    - Je vis en France depuis longtemps et j'aimerais devenir français. Qu'est-ce qu'on me demande ?
+    - naturalisation conditions
+    - condition pour etre naturalisé francais
+
+- base: q033
+  variants:
+    - Quelle est la démarche pour obtenir un logement en résidence universitaire Crous ?
+    - comment on fait pour avoir une chambre crous ?
+    - Je commence mes études à Bordeaux en septembre et je cherche une chambre pas chère en résidence étudiante. Je m'y prends comment ?
+    - demande logement Crous
+    - comment demandé un logement au crous
+
+- base: q040
+  variants:
+    - Le titulaire d'une carte de résident de dix ans arrivant à expiration peut-il obtenir une carte de résident permanent ?
+    - ma carte de 10 ans se termine, je peux avoir la carte définitive ?
+    - J'ai une carte de résident depuis presque 10 ans et elle expire bientôt. Il existe une carte qui ne s'arrête jamais ?
+    - carte résident permanent renouvellement carte 10 ans
+    - ma carte de resident 10 ans expire je peux avoir la carte permanante
+
+- base: q045
+  variants:
+    - À partir de quand est-il possible de demander le renouvellement d'un passeport ?
+    - je peux refaire mon passeport quand ?
+    - Mon passeport expire dans 8 mois et je pars en voyage l'année prochaine. Je peux déjà le refaire ?
+    - renouvellement passeport délai
+    - quand est ce qu'on peu renouvelé son passport
+
+- base: q049
+  variants:
+    - Un bailleur peut-il exiger un dépôt de garantie équivalent à trois mois de loyer pour une location non meublée ?
+    - mon proprio veut 3 mois de caution pour un appart vide, c'est légal ?
+    - Pour signer le bail de mon appartement non meublé, l'agence me réclame une caution de 3 loyers. C'est normal ?
+    - dépôt de garantie maximum logement vide
+    - le propriétaire peu demander 3 mois de caution pour un logement vide
+
+- base: q053
+  variants:
+    - Quelle est la durée du préavis applicable au locataire d'un logement meublé souhaitant résilier son bail ?
+    - je quitte mon studio meublé, je dois prévenir combien de temps avant ?
+    - Je déménage dans une autre ville le mois prochain, je suis dans un meublé. Quand dois-je envoyer ma lettre au propriétaire ?
+    - préavis location meublée locataire
+    - preavis pour quitter un studio meubler
+
+- base: q059
+  variants:
+    - Combien de jours de congés payés un salarié acquiert-il chaque année ?
+    - on a droit à combien de jours de vacances payées par an quand on est salarié ?
+    - Je viens de signer mon premier CDI, je voudrais savoir combien de semaines de vacances j'aurai.
+    - congés payés nombre de jours par an
+    - combien de jour de congé payer par an pour un salarier
+
+- base: q062
+  variants:
+    - Un salarié qui démissionne peut-il bénéficier de l'allocation chômage ?
+    - si je quitte mon taf moi-même, j'ai le chômage ?
+    - Je ne supporte plus mon travail et je pense partir de moi-même. Est-ce que France Travail va m'indemniser ?
+    - démission droit chômage
+    - si je demisione j'ai droit au chomage
+
+- base: q064
+  variants:
+    - Est-il possible de revenir sur une rupture conventionnelle après sa signature ?
+    - j'ai signé ma rupture conv, je peux annuler ?
+    - J'ai signé un accord avec mon patron pour partir de l'entreprise, mais je regrette. Je peux faire marche arrière ?
+    - rupture conventionnelle rétractation
+    - apres avoir signé une rupture conventionel on peut changer davis
+
+- base: q072
+  variants:
+    - Un ressortissant étranger peut-il conclure un pacte civil de solidarité en France ?
+    - je suis pas français, je peux me pacser ?
+    - Ma copine est française et moi je suis brésilien, on aimerait s'unir sans se marier. C'est possible ?
+    - Pacs étranger conditions
+    - un etranger peut se pacsé en france
+
+- base: q073
+  variants:
+    - De quel délai dispose-t-on pour régler ou contester une amende pour excès de vitesse ?
+    - j'ai pris un flash, j'ai combien de temps pour payer ou contester ?
+    - J'ai reçu un avis de contravention à la maison après être passé trop vite devant un radar. Je dois réagir avant quand ?
+    - amende excès de vitesse délai paiement contestation
+    - jai recu une amende de vitesse combien de temp pour payé ou contesté
+
+- base: q129
+  variants:
+    - Dans quel délai le bailleur est-il tenu de restituer le dépôt de garantie ?
+    - le proprio a combien de temps pour me rendre ma caution ?
+    - J'ai rendu les clés de mon appartement il y a trois semaines et je n'ai toujours pas récupéré mon argent. C'est normal ?
+    - restitution dépôt de garantie délai
+    - en combien de temp le proprietaire doit rendre la caution
+
+- base: q147
+  variants:
+    - Quelle démarche effectuer en cas de vol d'un titre de séjour en France ?
+    - on m'a volé ma carte de séjour, je fais quoi ?
+    - On m'a arraché mon sac dans le métro hier et ma carte de séjour était dedans. Comment je fais maintenant ?
+    - vol titre de séjour démarche
+    - mon titre de sejour a été volé que faire

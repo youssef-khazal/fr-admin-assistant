@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Publication xmlns:dc="http://purl.org/dc/elements/1.1/" ID="F9999" type="Fiche Question-réponse" spUrl="https://www.service-public.gouv.fr/particuliers/vosdroits/F9999" dateDerniereModificationImportante="2026-04-14T10:00:00">
+  <dc:title>Préavis du locataire (fiche de test)</dc:title>
+  <dc:description>Fiche inventée pour les tests.</dc:description>
+  <Introduction><Texte><Paragraphe>Le délai dépend du logement.</Paragraphe></Texte></Introduction>
+  <ListeSituations>
+    <Situation>
+      <Titre>Logement vide</Titre>
+      <Texte>
+        <Chapitre>
+          <Titre><Paragraphe>Quel est le délai de préavis ?</Paragraphe></Titre>
+          <Paragraphe>Le délai est de 3 mois.</Paragraphe>
+          <Liste><Item><Paragraphe>1 mois en zone tendue</Paragraphe></Item></Liste>
+          <ANoter><Paragraphe>Indiquez le motif dans la lettre.</Paragraphe></ANoter>
+        </Chapitre>
+      </Texte>
+    </Situation>
+    <Situation>
+      <Titre>Logement meublé</Titre>
+      <Texte>
+        <Chapitre>
+          <Titre><Paragraphe>Quel est le délai de préavis ?</Paragraphe></Titre>
+          <Paragraphe>Le délai est de 1 mois.</Paragraphe>
+          <Tableau><Rangée><Cellule><Paragraphe>Bail</Paragraphe></Cellule><Cellule><Paragraphe>Délai</Paragraphe></Cellule></Rangée>
+            <Rangée><Cellule><Paragraphe>Meublé</Paragraphe></Cellule><Cellule><Paragraphe>1 mois</Paragraphe></Cellule></Rangée></Tableau>
+        </Chapitre>
+      </Texte>
+    </Situation>
+  </ListeSituations>
+  <QuiPeutMAider ID="R250" type="Centre de contact"><Titre>3939 Allô Service Public</Titre></QuiPeutMAider>
+</Publication>

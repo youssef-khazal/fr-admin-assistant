@@ -1,0 +1,322 @@
+{
+ "v4": {
+  "questions": {
+   "all": {
+    "n": 144,
+    "hit@1": 0.778,
+    "hit@5": 0.958
+   },
+   "dev": {
+    "n": 51,
+    "hit@1": 0.745,
+    "hit@5": 0.941
+   },
+   "test": {
+    "n": 93,
+    "hit@1": 0.796,
+    "hit@5": 0.968
+   }
+  },
+  "rewordings": {
+   "all": {
+    "n": 120,
+    "hit@1": 0.675,
+    "hit@5": 0.908
+   },
+   "formal": {
+    "n": 24,
+    "hit@1": 0.75,
+    "hit@5": 1.0
+   },
+   "spoken": {
+    "n": 24,
+    "hit@1": 0.583,
+    "hit@5": 0.875
+   },
+   "indirect": {
+    "n": 24,
+    "hit@1": 0.417,
+    "hit@5": 0.792
+   },
+   "keywords": {
+    "n": 24,
+    "hit@1": 0.833,
+    "hit@5": 1.0
+   },
+   "misspelled": {
+    "n": 24,
+    "hit@1": 0.792,
+    "hit@5": 0.875
+   }
+  },
+  "by_category": {
+   "abbrev": {
+    "n": 7,
+    "hit@1": 0.714,
+    "hit@5": 0.857
+   },
+   "arabic": {
+    "n": 15,
+    "hit@1": 0.6,
+    "hit@5": 0.867
+   },
+   "clarify": {
+    "n": 6,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "clean": {
+    "n": 27,
+    "hit@1": 0.815,
+    "hit@5": 0.963
+   },
+   "english": {
+    "n": 16,
+    "hit@1": 0.875,
+    "hit@5": 1.0
+   },
+   "followup": {
+    "n": 5,
+    "hit@1": 0.8,
+    "hit@5": 1.0
+   },
+   "injection": {
+    "n": 1,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "mixed": {
+    "n": 1,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "multi": {
+    "n": 4,
+    "hit@1": 0.75,
+    "hit@5": 1.0
+   },
+   "not_covered": {
+    "n": 2,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "premise": {
+    "n": 8,
+    "hit@1": 0.75,
+    "hit@5": 1.0
+   },
+   "short": {
+    "n": 15,
+    "hit@1": 0.667,
+    "hit@5": 0.933
+   },
+   "situation": {
+    "n": 18,
+    "hit@1": 0.667,
+    "hit@5": 0.944
+   },
+   "sms": {
+    "n": 5,
+    "hit@1": 0.8,
+    "hit@5": 1.0
+   },
+   "story": {
+    "n": 2,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "typo": {
+    "n": 11,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "urgent": {
+    "n": 1,
+    "hit@1": 0.0,
+    "hit@5": 1.0
+   }
+  },
+  "misses_hit5": [
+   "q021",
+   "q025",
+   "q084",
+   "q096",
+   "q137",
+   "q160"
+  ],
+  "rewording_misses_hit5": [
+   "q013/indirect",
+   "q017/misspelled",
+   "q028/spoken",
+   "q028/indirect",
+   "q040/spoken",
+   "q059/indirect",
+   "q062/indirect",
+   "q072/indirect",
+   "q072/misspelled",
+   "q073/spoken",
+   "q073/misspelled"
+  ]
+ },
+ "v5": {
+  "questions": {
+   "all": {
+    "n": 144,
+    "hit@1": 0.764,
+    "hit@5": 0.944
+   },
+   "dev": {
+    "n": 51,
+    "hit@1": 0.745,
+    "hit@5": 0.941
+   },
+   "test": {
+    "n": 93,
+    "hit@1": 0.774,
+    "hit@5": 0.946
+   }
+  },
+  "rewordings": {
+   "all": {
+    "n": 120,
+    "hit@1": 0.7,
+    "hit@5": 0.908
+   },
+   "formal": {
+    "n": 24,
+    "hit@1": 0.75,
+    "hit@5": 1.0
+   },
+   "spoken": {
+    "n": 24,
+    "hit@1": 0.625,
+    "hit@5": 0.833
+   },
+   "indirect": {
+    "n": 24,
+    "hit@1": 0.458,
+    "hit@5": 0.792
+   },
+   "keywords": {
+    "n": 24,
+    "hit@1": 0.875,
+    "hit@5": 1.0
+   },
+   "misspelled": {
+    "n": 24,
+    "hit@1": 0.792,
+    "hit@5": 0.917
+   }
+  },
+  "by_category": {
+   "abbrev": {
+    "n": 7,
+    "hit@1": 0.857,
+    "hit@5": 1.0
+   },
+   "arabic": {
+    "n": 15,
+    "hit@1": 0.6,
+    "hit@5": 0.8
+   },
+   "clarify": {
+    "n": 6,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "clean": {
+    "n": 27,
+    "hit@1": 0.778,
+    "hit@5": 0.963
+   },
+   "english": {
+    "n": 16,
+    "hit@1": 0.938,
+    "hit@5": 1.0
+   },
+   "followup": {
+    "n": 5,
+    "hit@1": 0.8,
+    "hit@5": 1.0
+   },
+   "injection": {
+    "n": 1,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "mixed": {
+    "n": 1,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "multi": {
+    "n": 4,
+    "hit@1": 0.75,
+    "hit@5": 1.0
+   },
+   "not_covered": {
+    "n": 2,
+    "hit@1": 0.5,
+    "hit@5": 0.5
+   },
+   "premise": {
+    "n": 8,
+    "hit@1": 0.75,
+    "hit@5": 1.0
+   },
+   "short": {
+    "n": 15,
+    "hit@1": 0.6,
+    "hit@5": 0.933
+   },
+   "situation": {
+    "n": 18,
+    "hit@1": 0.667,
+    "hit@5": 0.944
+   },
+   "sms": {
+    "n": 5,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "story": {
+    "n": 2,
+    "hit@1": 0.0,
+    "hit@5": 0.5
+   },
+   "typo": {
+    "n": 11,
+    "hit@1": 1.0,
+    "hit@5": 1.0
+   },
+   "urgent": {
+    "n": 1,
+    "hit@1": 0.0,
+    "hit@5": 1.0
+   }
+  },
+  "misses_hit5": [
+   "q025",
+   "q076",
+   "q084",
+   "q090",
+   "q096",
+   "q137",
+   "q160",
+   "q163"
+  ],
+  "rewording_misses_hit5": [
+   "q013/indirect",
+   "q017/spoken",
+   "q017/misspelled",
+   "q028/spoken",
+   "q028/indirect",
+   "q040/spoken",
+   "q059/indirect",
+   "q062/indirect",
+   "q072/indirect",
+   "q073/spoken",
+   "q073/misspelled"
+  ]
+ }
+}
