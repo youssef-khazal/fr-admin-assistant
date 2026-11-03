@@ -15,3 +15,7 @@ __pycache__/
 /results/judgements_v*.jsonl
 /results/scores.json
 /results/answers_v3.jsonl
+/finetune/data/
+/finetune/out/
+/results/finetune_run.log
+/results/answers_smoke*.jsonl

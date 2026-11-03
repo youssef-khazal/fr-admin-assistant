@@ -13,6 +13,7 @@ dependencies = ["lxml>=5.0", "numpy>=1.26", "pyyaml>=6.0", "rank-bm25>=0.2.2", "
 gpu = ["sentence-transformers>=3.0"]
 app = ["fastapi>=0.110", "uvicorn>=0.29", "sentence-transformers>=3.0"]
 dev = ["pytest>=8.0", "httpx>=0.27", "fastapi>=0.110"]
+finetune = ["torch>=2.5", "transformers>=4.51", "peft>=0.13", "bitsandbytes>=0.45", "accelerate>=1.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

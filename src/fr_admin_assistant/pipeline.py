@@ -17,6 +17,7 @@ Steps:
 from __future__ import annotations
 
 import json
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -178,7 +179,7 @@ def clearly_new(prev: str, last: str) -> bool:
             and not (_content_words(prev) & _content_words(last)))
 
 
-def is_followup(turns: list[str], model: str | None = None, num_ctx: int = 12288) -> bool:
+def is_followup(turns: list[str], model: str | None = None, num_ctx: int = 8192) -> bool:
     """Is the last message the continuation of the previous one, or a new question? (one short LLM call)"""
     if len(turns) < 2:
         return False
@@ -233,6 +234,12 @@ class Result:
     lang: str = "fr"
     checks: dict = field(default_factory=dict)  # number check: unsupported numbers, regenerated?
     followup: bool = False
+
+
+# Context size with reasoning on. v7 was first measured at 12288, which does not fit in an 8 GB GPU: Ollama then
+# runs part of the model on the CPU (about 4 min per answer). At 8192 it runs fully on the GPU (about 70 s), with the
+# same scores within the noise on the 163 test questions (results/judgements2_v7ctx8k.jsonl).
+NUM_CTX_THINK = int(os.environ.get("NUM_CTX_THINK", "8192"))
 
 
 class Assistant:
@@ -291,7 +298,7 @@ class Assistant:
         return [Hit(c, float(s)) for c, s in sorted(zip(cands, scores), key=lambda x: -x[1])]
 
     def is_followup(self, turns: list[str]) -> bool:
-        return is_followup(turns, self.model, num_ctx=12288 if self.think else 8192)
+        return is_followup(turns, self.model, num_ctx=NUM_CTX_THINK if self.think else 8192)
 
     # v6 used per_section=2 and max_siblings=2; the measured result was more mixing of rules between situations
     # (more, and more varied, passages for an 8B model). v7 keeps v4's plain top passages and adds at most one
@@ -408,6 +415,19 @@ class Assistant:
         query = " ".join(turns[-2:]) if followup and len(turns) > 1 else turns[-1]
         return self.passages(self.search(query), query=query)
 
+    def build_messages(self, turns: list[str], history: list[dict], passages: list[Passage]) -> tuple[list[dict], list[dict], str]:
+        """The exact messages sent to the LLM: rules + answer language + passages + contacts, then the conversation.
+        Also used to build the fine-tuning data, so that training and use see the same prompt."""
+        contacts = self.contacts_for(passages)
+        lang = detect_language(turns[-1])
+        system = SYSTEM + f"\n\nLANGUE DE LA RÉPONSE : {LANG_NAMES[lang]}. Le texte de « answer » doit être entièrement dans cette langue."
+        messages = [{"role": "system", "content": system + "\n\n" + self.context_block(passages, contacts)}]
+        for i, t in enumerate(turns):
+            messages.append({"role": "user", "content": t})
+            if i < len(turns) - 1 and i < len(history):
+                messages.append({"role": "assistant", "content": history[i]["content"]})
+        return messages, contacts, lang
+
     def ask(self, turns: list[str], history: list[dict] | None = None, passages: list[Passage] | None = None,
             followup: bool | None = None, think: bool | None = None, on_event=None) -> Result:
         """turns: the user's messages so far (the last one is answered); history: previous assistant replies.
@@ -426,14 +446,7 @@ class Assistant:
                 history = history[len(turns) - 2:len(turns) - 1]
                 turns = turns[-2:]
         passages = passages if passages is not None else self.retrieve(turns, followup=bool(followup))
-        contacts = self.contacts_for(passages)
-        lang = detect_language(turns[-1])
-        system = SYSTEM + f"\n\nLANGUE DE LA RÉPONSE : {LANG_NAMES[lang]}. Le texte de « answer » doit être entièrement dans cette langue."
-        messages = [{"role": "system", "content": system + "\n\n" + self.context_block(passages, contacts)}]
-        for i, t in enumerate(turns):
-            messages.append({"role": "user", "content": t})
-            if i < len(turns) - 1 and i < len(history):
-                messages.append({"role": "assistant", "content": history[i]["content"]})
+        messages, contacts, lang = self.build_messages(turns, history, passages)
         behaviour, answer, cites, raw = self._generate(messages, think, on_event)
         # number check: every amount / delay / number must come from the sheets, the contacts or the user
         sources = [p.chunk.text for p in passages] + [c["details"] for c in contacts] + list(turns) + \
@@ -466,7 +479,7 @@ class Assistant:
         think = self.think if think is None else think
         kwargs = {"model": self.model} if self.model else {}
         opts = dict(json_mode=True, max_tokens=3500 if think else 900, think=think,
-                    num_ctx=12288 if self.think else 8192,  # same context size in both modes: no model reload
+                    num_ctx=NUM_CTX_THINK if self.think else 8192,  # same context size in both modes: no model reload
                     timeout=600 if think else 300, **kwargs)
         # with reasoning on, the model first works through the checks (situation, relevance) before answering
         try:
@@ -569,7 +582,10 @@ def user_wording(answer: str) -> str:
 
 def parse(raw: str) -> tuple[str, str, list[int]]:
     try:
-        d = json.loads(raw)
+        try:
+            d = json.loads(raw)
+        except json.JSONDecodeError:  # a model without JSON mode may wrap it in ```json fences or add a sentence
+            d = json.loads(raw[raw.index("{"):raw.rindex("}") + 1])
         cites = [int(x) for x in d.get("citations", []) if str(x).isdigit()]
         return str(d.get("behaviour", "answer")), str(d.get("answer", "")), cites
     except (json.JSONDecodeError, ValueError, TypeError, AttributeError):

@@ -42,10 +42,11 @@ def main() -> None:
     p.add_argument("--think", action="store_true", help="let the LLM reason before answering (slower)")
     p.add_argument("--tag", default="", help="suffix for the output files, to compare setups")
     p.add_argument("--judge-only", action="store_true", help="grade existing answers<tag>.jsonl")
+    p.add_argument("--limit", type=int, default=None, help="only the first N questions (quick test)")
     p.add_argument("--judge-out", default=None, help="judgements file name (default judgements<tag>.jsonl)")
     a = p.parse_args()
 
-    questions = yaml.safe_load(open(a.questions, encoding="utf-8"))
+    questions = yaml.safe_load(open(a.questions, encoding="utf-8"))[:a.limit]
     a.results.mkdir(parents=True, exist_ok=True)
     ans_path = a.results / f"answers{a.tag}.jsonl"
     jud_path = a.results / (a.judge_out or f"judgements{a.tag}.jsonl")

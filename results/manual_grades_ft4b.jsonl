@@ -1,0 +1,163 @@
+{"id": "q001", "behaviour_ok": true, "facts": [true, false, true], "invented_or_wrong": []}
+{"id": "q002", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q003", "behaviour_ok": true, "facts": [true, false, true], "invented_or_wrong": ["'an EU citizen may get a pluriannual student residence permit' (EU citizens need no student permit; not in the passages)"]}
+{"id": "q004", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q005", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q006", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q007", "behaviour_ok": false, "facts": [true, true, true], "invented_or_wrong": []}
+{"id": "q008", "behaviour_ok": true, "facts": [true, false, true, true], "invented_or_wrong": ["'5 years of continuous residence proof' for a pluriannual card (taken from the European-student permanent-card section)"]}
+{"id": "q009", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": []}
+{"id": "q010", "behaviour_ok": false, "facts": [true, false, false], "invented_or_wrong": ["'they must apply for a work permit online' (no authorisation needed within 964 h)"]}
+{"id": "q011", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q012", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q013", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q014", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": []}
+{"id": "q015", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q016", "behaviour_ok": true, "facts": [false, true], "invented_or_wrong": []}
+{"id": "q017", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": ["'you are no longer attached to their tax household' (the rule concerns family benefits, not tax)"]}
+{"id": "q018", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q019", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": []}
+{"id": "q020", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q021", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q022", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["answers 'No' although 2 years after the degree is within the 4-year limit"]}
+{"id": "q023", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q024", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": []}
+{"id": "q025", "behaviour_ok": false, "facts": [false, false, false], "invented_or_wrong": []}
+{"id": "q026", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q027", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q028", "behaviour_ok": false, "facts": [false, false], "invented_or_wrong": ["'you can drive with your Tunisian licence for 6 months' (it is 1 year)"]}
+{"id": "q029", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q030", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": ["'you must have a family or professional link with a French person' (the rule is that your centre of interests and family must be in France)"]}
+{"id": "q031", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q032", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q033", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": []}
+{"id": "q034", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q035", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q036", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q037", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q038", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q039", "behaviour_ok": true, "facts": [false], "invented_or_wrong": []}
+{"id": "q040", "behaviour_ok": true, "facts": [true, true, false], "invented_or_wrong": []}
+{"id": "q041", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q042", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q043", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q044", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q045", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q046", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q047", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q048", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q049", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q050", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q051", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q052", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q053", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q054", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q055", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q056", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q057", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q058", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q059", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q060", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q061", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q062", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": ["gives 'resigning after a dismissal or a rupture conventionnelle' as a legitimate resignation"]}
+{"id": "q063", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q064", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": []}
+{"id": "q065", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q066", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q067", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q068", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q069", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q070", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q071", "behaviour_ok": false, "facts": [false, true], "invented_or_wrong": ["says the sheets give no amount when the partners write the convention themselves (registration in mairie is free)"]}
+{"id": "q072", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q073", "behaviour_ok": true, "facts": [true, false, false], "invented_or_wrong": ["'the fixed fine is generally 150 €' (not in the passages)"]}
+{"id": "q074", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q075", "behaviour_ok": true, "facts": [false, false, false], "invented_or_wrong": []}
+{"id": "q076", "behaviour_ok": true, "facts": [true, false, true], "invented_or_wrong": ["'you can apply for a VLS-TS' as a way to stay and work (a long-stay visa is applied for from abroad)"]}
+{"id": "q077", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q078", "behaviour_ok": false, "facts": [true, false], "invented_or_wrong": ["'renewal possible 3 months before expiry' (taken from a weapons-licence sheet; it is within the year before)"]}
+{"id": "q079", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": ["'no reply within 90 days = implicit refusal' (that rule is for the 'programme de mobilité' permit)"]}
+{"id": "q080", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["'if the rent is paid as a flat rate the deposit is forbidden' (the passage is about charges paid as a flat rate and the 2-month return delay)"]}
+{"id": "q081", "behaviour_ok": true, "facts": [false], "invented_or_wrong": ["'you must apply for a work permit online before your permit expires'; 'fines or legal consequences' (not in the passages)"]}
+{"id": "q082", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q083", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["'the tax stamp costs 10 €'"]}
+{"id": "q084", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["'if you have lived in France more/less than 5 years, apply 4 months before' (invented distinction)"]}
+{"id": "q085", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q086", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q087", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q088", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q089", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q090", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q091", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["gives SAS creation steps (a 'RGSS' register) and points to associations offices"]}
+{"id": "q092", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["answers with French youth-mobility visa rules as if they were the Canadian work-visa requirements"]}
+{"id": "q093", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q094", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q095", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q096", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q097", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q098", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q099", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q100", "behaviour_ok": false, "facts": [false, true, false], "invented_or_wrong": ["'17 (SAMU)': 17 is the police, the SAMU is 15"]}
+{"id": "q101", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q102", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": ["tells someone robbed in France to declare the theft to the nearest French embassy or consulate (that is the rule abroad)"]}
+{"id": "q103", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q104", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q105", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q106", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q107", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["tells an Algerian student he can work 964 h without authorisation (the general rule), then contradicts it with the 50% rule"]}
+{"id": "q108", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q109", "behaviour_ok": false, "facts": [false, false], "invented_or_wrong": ["says 25 h a week all year is allowed (it is about 1,300 h, above the 964-h limit)"]}
+{"id": "q110", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q111", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q112", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q113", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": ["says the RECE is for 'French or non-EU graduates' and that it lets you work with a salary above 2,800.53 € linked to your studies (misapplied condition)"]}
+{"id": "q114", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q115", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": ["'accompanied by a French translation or a European driving permit' (it is an international driving permit)"]}
+{"id": "q116", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q117", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["presents refugee / francophone cases as exceptions to the language condition"]}
+{"id": "q118", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q119", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q120", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q121", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q122", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q123", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q124", "behaviour_ok": true, "facts": [false, true], "invented_or_wrong": ["'your monthly income (including the internship) must exceed 1,144.21 €' (the internship allowance does not count)"]}
+{"id": "q125", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q126", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q127", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q128", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q129", "behaviour_ok": true, "facts": [true, true], "invented_or_wrong": []}
+{"id": "q130", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q131", "behaviour_ok": true, "facts": [false, true], "invented_or_wrong": []}
+{"id": "q132", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q133", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q134", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q135", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["gives the civil-service rule ('15 jours francs', 'date de cessation des fonctions') to a private-sector employee"]}
+{"id": "q136", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["'the 2027 return must be sent before 31 March 2027' (it opens in April 2027)"]}
+{"id": "q137", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["'the occupational doctor must be informed of your médecin traitant' (not in the passage)"]}
+{"id": "q138", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q139", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["'proof of a 1-year cohabitation' to sign a PACS (taken from the residence card for a PACS partner of an EU citizen)"]}
+{"id": "q140", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["gives the delays of the increased fine (30 days, 45 by card) for the initial fine"]}
+{"id": "q141", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["suggests you can still contest after paying by designating another driver (designation replaces payment)"]}
+{"id": "q142", "behaviour_ok": true, "facts": [true, false], "invented_or_wrong": []}
+{"id": "q143", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q144", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["tells an EU (Spanish) student he needs a VLS-TS / student residence permit and 877.5 €/month (non-EU rules)"]}
+{"id": "q145", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q146", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q147", "behaviour_ok": true, "facts": [true, true, true], "invented_or_wrong": []}
+{"id": "q148", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q149", "behaviour_ok": false, "facts": [false], "invented_or_wrong": []}
+{"id": "q150", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q151", "behaviour_ok": true, "facts": [false, true], "invented_or_wrong": ["calls the European student card 'Citéon' (invented name)"]}
+{"id": "q152", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["Arabic: says an adult passport costs 96 € abroad and 30 € in France (30 € is the emergency passport; 86 € is the normal price)"]}
+{"id": "q153", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["Arabic: answers with the deposit rules for buying off-plan property (5% / 2% of the price), not a rental deposit"]}
+{"id": "q154", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["Arabic: adds that a minor's lease must be signed by the parents and an IFI wealth-tax remark (not in the passages)"]}
+{"id": "q155", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["Arabic: 'be born in a French state or have benefited from French services' as conditions (garbled)"]}
+{"id": "q156", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["Arabic: 'FPH civil servants get 20 days' (the 20 days are a part-time example)"]}
+{"id": "q157", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["Arabic: presents the business-closure case as the three conditions for any resignation"]}
+{"id": "q158", "behaviour_ok": true, "facts": [true], "invented_or_wrong": ["Arabic: says to replace the residence card at the town hall (it is a duplicate request on the ANEF)"]}
+{"id": "q159", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q160", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["Arabic: says a residence card does not need updating after a move (it must be declared within 3 months)"]}
+{"id": "q161", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q162", "behaviour_ok": true, "facts": [true], "invented_or_wrong": []}
+{"id": "q163", "behaviour_ok": false, "facts": [false], "invented_or_wrong": ["Arabic: answers 'yes' to RSA for students (the rule is 'no, except…')"]}

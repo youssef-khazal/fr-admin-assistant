@@ -20,4 +20,13 @@ Everything behind the numbers in the main README. All files are plain JSON / JSO
 | `scores2.json` | judge scores per version, per category and per language. Made by `scripts/score_answers.py`. |
 | `manual_scores.json` | hand-grading scores with 95% bootstrap intervals, and the paired differences between versions |
 
+## Fine-tuning (see `finetune/README.md`)
+| file | what it holds |
+|---|---|
+| `answers_base4b.jsonl`, `answers_ft4b.jsonl` | the 163 answers of Qwen3-4B before and after fine-tuning (Hugging Face backend, no reasoning step) |
+| `answers_v7ctx8k.jsonl` | v7 re-run with a context of 8,192 tokens instead of 12,288 |
+| `judgements2_base4b.jsonl`, `judgements2_ft4b.jsonl`, `judgements2_v7ctx8k.jsonl` | the LLM judge's verdicts on these three runs |
+| `manual_grades_ft4b.jsonl` | the hand grading of the 163 answers of the fine-tuned model |
+| `finetune_scores.json` | scores with 95% bootstrap intervals and paired differences, by the judge (four runs) and by hand (fine-tuned model vs v7). Made by `scripts/compare_runs.py`. |
+
 Question ids (`q001` … `q163`) refer to `data/eval/questions.yaml`, which also gives the expected behaviour, the official sheets that answer each question and the facts the answer should contain.

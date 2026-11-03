@@ -95,6 +95,7 @@ Each answer is graded on three things: did the assistant pick the **right behavi
 - **Code guards help; extra context does not.** v5 and v6 gave the model more text (passages from other situations, split sub-questions). Each change fixed some answers and broke others, and invented content went up from 14% to 17–18%. With an 8B model, more passages mostly means more mixing of rules between neighbouring cases.
 - **v7** goes back to v4's 8 passages (plus at most one passage for another situation, only when the question names none) and keeps everything that is enforced in code: emergency numbers first, a fixed off-topic reply, refusal of injected instructions, citations, a number check, follow-up detection and the abbreviation glossary. It has the best behaviour score (92.6%: every emergency, off-topic, injection, follow-up, false-premise and abbreviation question handled correctly) with invented content back near v4's level. Compared with v4, it fixes 5 behaviour failures and breaks 1. The differences with v4 are within the noise, so the honest summary is: **v7 is at least as good as v4 on facts, and better on safety behaviour.**
 - **Rapide mode** (no reasoning step) is several times faster (about 25 s per answer on the laptop GPU), at a cost of about 7 points of behaviour and facts (judge figures). The UI offers both and says so.
+- **Speed of the careful mode:** v7 was measured with a context of 12,288 tokens, which does not fit in the 8 GB GPU (part of the model ran on the CPU, about 4 minutes per answer). Re-run at 8,192 tokens, it runs fully on the GPU at about 70 s per answer, with the same scores within the noise (judge: behaviour −1.8 [−6.8, +3.1], facts −1.6 [−4.6, +1.6]). 8,192 is the default.
 
 **Where v7 still goes wrong (hand grading):**
 - *Rule mixing* is the main error: a rule from a neighbouring case given for the user's case. Examples: the 12-month family-reunification rule for Algerians extended to all of North and sub-Saharan Africa; the payment delay of another type of fine given for a speeding ticket; a rule for "regroupement sur place" given for the general case.
@@ -102,6 +103,18 @@ Each answer is graded on three things: did the assistant pick the **right behavi
 - *Arabic* is the weakest language: 80% behaviour and 69% facts on 15 questions, against 92–100% in French and English, with some translation slips (EU/EEA rendered as an "African economic area").
 
 **How far the judge can be trusted:** the judge is Qwen3-8B in reasoning mode, comparing each answer with its passages and the expected facts. Against the hand grading of the 163 v7 answers it agrees on 93% of behaviour verdicts and 90% of facts, but only 70% of invented-content verdicts (71–79% for earlier versions). It is good enough to compare versions on behaviour and facts, but not to count invented content, which is why that column is graded by hand. The judge tends to list *missing* facts as "unsupported"; `scripts/score_answers.py` corrects for this. In the hand grading, an answer that lists the possible cases instead of asking a question was accepted for "clarify" questions.
+
+### Fine-tuning a smaller model (Qwen3-4B, QLoRA)
+Qwen3-4B was fine-tuned with a LoRA add-on on 658 answers written by v7 itself, on questions generated from sheets that are **not** in the test set. Training took 3 hours on the laptop GPU. Same 163 questions, same search and checks:
+
+| model | right behaviour | facts found | invented or wrong |
+|---|---|---|---|
+| Qwen3-4B, before fine-tuning (judge) | 73.6% | 72.3% | 32.5% |
+| Qwen3-4B + LoRA (judge) | 79.8% | 78.7% | 30.1% |
+| Qwen3-4B + LoRA (hand) | 85.9% | 76.3% | 27.0% |
+| v7, Qwen3-8B + reasoning (hand) | 92.6% | 81.4% | 15.3% |
+
+The fine-tuned model is clearly better than the 4B it started from: +6.3 [+1.2, +11.6] points of facts found. It also learned to say when the guides don't answer: it labels 9 of the 11 not-covered questions that way, against 1 before. It does not reach v7: it has nearly twice as much invented content, and Arabic answers are its weak point. So the app keeps v7. Method, the memory tricks needed to train on 8 GB, and detailed results: [`finetune/README.md`](finetune/README.md).
 
 ## Honest limits
 - When search misses the right sheet, the assistant can only fall back. About 4% of questions don't get the right sheet in the top 5. For Arabic questions this is 1 in 15.
@@ -135,7 +148,7 @@ python scripts/eval_followup.py                  # follow-up detector
 python scripts/run_answers.py --tag _v7 --think --judge-out judgements2_v7.jsonl   # answer + judge the 163 questions
 python scripts/score_answers.py v7=results/judgements2_v7.jsonl --manual results/manual_grades_v7.jsonl
 ```
-Every result file is described in [`results/README.md`](results/README.md).
+Every result file is described in [`results/README.md`](results/README.md). The fine-tuning experiment has its own steps in [`finetune/README.md`](finetune/README.md).
 
 ## Repository layout
 ```
@@ -143,10 +156,11 @@ src/fr_admin_assistant/
   parse.py, chunking.py   XML sheets -> clean text -> passages with their heading path
   retrieval.py            BM25, dense search, fusion
   pipeline.py             search + reranking, prompt, answer, checks and guards in code
-  llm.py, judge.py        Ollama client; the LLM judge
+  llm.py, judge.py        LLM client (Ollama, or a Hugging Face model + LoRA add-on); the LLM judge
   rewrite.py              LLM query rewriting (tested, rejected: see Search results)
   app.py, static/         FastAPI back end and the chat page
 scripts/                  corpus building, embeddings, evaluation runs, scoring
+finetune/                 fine-tuning Qwen3-4B with QLoRA: data generation, checks, training
 data/eval/                the 163 test questions, 120 rewordings, 28 follow-up cases
 results/                  every answer, judge verdict and hand grade behind the numbers above
 tests/                    unit tests (no model needed), run on every push
