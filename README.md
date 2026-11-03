@@ -126,9 +126,11 @@ The fine-tuned model is clearly better than the 4B it started from: +6.3 [+1.2, 
 ## Run it
 With Docker (app + Ollama; the corpus and index must be built first, see below):
 ```bash
-docker compose up
-docker compose exec ollama ollama pull qwen3:8b   # first time only
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build   # NVIDIA GPU; plain "docker compose up -d" runs on CPU
+docker compose exec ollama ollama pull qwen3:8b                                 # first time only
+# chat page on http://localhost:8000
 ```
+Tested with Docker Desktop on Windows (WSL 2) and an 8 GB laptop GPU: the model runs 100% on the GPU, and a fast-mode answer takes about 5 s of search and 12 s of writing once the models are loaded (the first question also downloads the search models).
 Or locally:
 ```bash
 pip install -e .[app]

@@ -1,0 +1,9 @@
+# Only pyproject.toml, requirements.txt, README.md and src/ go into the image; data/ and results/ are mounted.
+.venv/
+.git/
+data/
+results/
+finetune/
+docs/
+tests/
+**/__pycache__/

@@ -5,11 +5,7 @@ services:
     image: ollama/ollama:latest
     volumes:
       - ollama:/root/.ollama
-    # GPU (NVIDIA): uncomment
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+    # NVIDIA GPU: add -f docker-compose.gpu.yml (see that file)
   app:
     build: .
     depends_on: [ollama]

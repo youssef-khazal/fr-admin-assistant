@@ -1,0 +1,14 @@
+# Same as docker-compose.yml, with the NVIDIA GPU given to Ollama and to the app (search models).
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up
+# Needs an NVIDIA driver; on Windows, Docker Desktop with the WSL 2 backend.
+services:
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: all, capabilities: [gpu]}]
+  app:
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: all, capabilities: [gpu]}]
