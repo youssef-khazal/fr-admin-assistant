@@ -114,7 +114,7 @@ Qwen3-4B was fine-tuned with a LoRA add-on on 658 answers written by v7 itself, 
 | Qwen3-4B + LoRA (hand) | 85.9% | 76.3% | 27.0% |
 | v7, Qwen3-8B + reasoning (hand) | 92.6% | 81.4% | 15.3% |
 
-The fine-tuned model is clearly better than the 4B it started from: +6.3 [+1.2, +11.6] points of facts found. It also learned to say when the guides don't answer: it labels 9 of the 11 not-covered questions that way, against 1 before. It does not reach v7: it has nearly twice as much invented content, and Arabic answers are its weak point. So the app keeps v7. Method, the memory tricks needed to train on 8 GB, and detailed results: [`finetune/README.md`](finetune/README.md).
+The fine-tuned model is clearly better than the 4B it started from: +6.3 [+1.2, +11.6] points of facts found. It also learned to say when the guides don't answer: it labels 9 of the 11 not-covered questions that way, against 1 before. It does not reach v7: it has nearly twice as much invented content, and Arabic answers are its weak point. So the app keeps v7. Method, the memory tricks needed to train on 8 GB, and detailed results: [`finetune/README.md`](finetune/README.md). The trained add-on is on Hugging Face: [youssef-khazal/qwen3-4b-demarches-lora](https://huggingface.co/youssef-khazal/qwen3-4b-demarches-lora).
 
 ## Honest limits
 - When search misses the right sheet, the assistant can only fall back. About 4% of questions don't get the right sheet in the top 5. For Arabic questions this is 1 in 15.

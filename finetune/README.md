@@ -131,4 +131,4 @@ To use the fine-tuned model in the app instead of Ollama: `LLM_BACKEND=hf HF_ADA
 | `run_all.ps1` | training, the three evaluation runs and the judge in one command |
 | `check_hf_speed.py` | 2-minute speed and memory check of the 4B on the GPU |
 
-The generated data and the trained add-on are not in the repository (`finetune/data/`, `finetune/out/`).
+The generated data and the trained add-on are not in the repository (`finetune/data/`, `finetune/out/`). The add-on is published on Hugging Face: [youssef-khazal/qwen3-4b-demarches-lora](https://huggingface.co/youssef-khazal/qwen3-4b-demarches-lora). To use it without training: `HF_ADAPTER=youssef-khazal/qwen3-4b-demarches-lora`.
