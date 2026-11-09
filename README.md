@@ -6,7 +6,7 @@ Ask a question about a French administrative procedure (residence permit, housin
 
 When the guides don't answer the question, it says so. It then points to the right official page, office or phone number instead of guessing.
 
-The project is about **measuring** how far such an assistant can be trusted. Retrieval and answers are scored on a hand-written test set of 163 questions, the LLM judge is checked against hand grading, and the results include the failures.
+The project is about **measuring** how far such an assistant can be trusted. Retrieval and answers are scored on a test set of 163 questions written for this project (every expected fact copied from the official sheets), the LLM judge is checked against a reference grading, and the results include the failures.
 
 Everything runs locally: a quantised 8B open model (Qwen3-8B through Ollama) on an 8 GB laptop GPU. No paid API is used.
 
@@ -70,9 +70,9 @@ Search holds up well to typos, keywords and formal phrasing; it is weakest when 
 ### Answers (judged against the expected facts of each question)
 163 questions across 18 categories: clean, typos, SMS, English, Arabic, abbreviations, false premises, missing situation, follow-ups, questions not covered by the guides, off-topic, emergencies and prompt injection.
 
-Each answer is graded on three things: did the assistant pick the **right behaviour** (answer, ask for the situation, fall back to official contacts, give emergency numbers first, refuse…), how many of the **expected facts** it gives, and whether it states **something invented or applied to the wrong situation**. Every answer of v4 to v7 was graded by hand (163 × 4); all versions were also graded by the LLM judge.
+Each answer is graded on three things: did the assistant pick the **right behaviour** (answer, ask for the situation, fall back to official contacts, give emergency numbers first, refuse…), how many of the **expected facts** it gives, and whether it states **something invented or applied to the wrong situation**. Every answer of v4 to v7 received a reference grading (163 × 4): each answer read in full against its passages by a stronger model (Claude), with a note for every error. All versions were also graded by the LLM judge.
 
-| version | what changed | right behaviour (hand) | facts found (hand) | invented or wrong (hand) | behaviour / facts (judge) |
+| version | what changed | right behaviour (ref.) | facts found (ref.) | invented or wrong (ref.) | behaviour / facts (judge) |
 |---|---|---|---|---|---|
 | v1 | first prompt | – | – | – | 72% / 67% |
 | v2 | stricter rules (situation check, no invented figures) | – | – | – | 78% / 77% |
@@ -82,7 +82,7 @@ Each answer is graded on three things: did the assistant pick the **right behavi
 | **v7 (final)** | v4's passages + v6's guards and glossary | **92.6%** | 81.4% | 15.3% | **89% / 87%** |
 | v7 "Rapide" | v7 without the reasoning step | – | – | – | 82% / 80% |
 
-"–" = not graded by hand. Hand grading (163 answers per version) was done for the versions that were candidates for the final one, v4 to v7; the early versions v1 and v2 and the fast mode are compared with the LLM judge only. v3 was a short intermediate test and is not reported.
+"–" = no reference grading. The reference grading (163 answers per version) was done for the versions that were candidates for the final one, v4 to v7; the early versions v1 and v2 and the fast mode are compared with the LLM judge only. v3 was a short intermediate test and is not reported.
 
 95% bootstrap intervals (2,000 resamples of the 163 questions) are about ±4 points for behaviour and facts and ±6 points for invented content. Paired differences, same questions resampled:
 
@@ -97,12 +97,12 @@ Each answer is graded on three things: did the assistant pick the **right behavi
 - **Rapide mode** (no reasoning step) is several times faster (about 25 s per answer on the laptop GPU), at a cost of about 7 points of behaviour and facts (judge figures). The UI offers both and says so.
 - **Speed of the careful mode:** v7 was measured with a context of 12,288 tokens, which does not fit in the 8 GB GPU (part of the model ran on the CPU, about 4 minutes per answer). Re-run at 8,192 tokens, it runs fully on the GPU at about 70 s per answer, with the same scores within the noise (judge: behaviour −1.8 [−6.8, +3.1], facts −1.6 [−4.6, +1.6]). 8,192 is the default.
 
-**Where v7 still goes wrong (hand grading):**
+**Where v7 still goes wrong (reference grading):**
 - *Rule mixing* is the main error: a rule from a neighbouring case given for the user's case. Examples: the 12-month family-reunification rule for Algerians extended to all of North and sub-Saharan Africa; the payment delay of another type of fine given for a speeding ticket; a rule for "regroupement sur place" given for the general case.
 - *Search misses*: when the right sheet is not retrieved, the answer falls back or answers from a nearby sheet (e.g. a change of address for a residence card answered with the general change-of-address service).
 - *Arabic* is the weakest language: 80% behaviour and 69% facts on 15 questions, against 92–100% in French and English, with some translation slips (EU/EEA rendered as an "African economic area").
 
-**How far the judge can be trusted:** the judge is Qwen3-8B in reasoning mode, comparing each answer with its passages and the expected facts. Against the hand grading of the 163 v7 answers it agrees on 93% of behaviour verdicts and 90% of facts, but only 70% of invented-content verdicts (71–79% for earlier versions). It is good enough to compare versions on behaviour and facts, but not to count invented content, which is why that column is graded by hand. The judge tends to list *missing* facts as "unsupported"; `scripts/score_answers.py` corrects for this. In the hand grading, an answer that lists the possible cases instead of asking a question was accepted for "clarify" questions.
+**How far the judge can be trusted:** the judge is Qwen3-8B in reasoning mode, comparing each answer with its passages and the expected facts. Against the reference grading of the 163 v7 answers it agrees on 93% of behaviour verdicts and 90% of facts, but only 70% of invented-content verdicts (71–79% for earlier versions). It is good enough to compare versions on behaviour and facts, but not to count invented content, which is why that column comes from the reference grading. The judge tends to list *missing* facts as "unsupported"; `scripts/score_answers.py` corrects for this. In the reference grading, an answer that lists the possible cases instead of asking a question was accepted for "clarify" questions.
 
 ### Fine-tuning a smaller model (Qwen3-4B, QLoRA)
 Qwen3-4B was fine-tuned with a LoRA add-on on 658 answers written by v7 itself, on questions generated from sheets that are **not** in the test set. Training took 3 hours on the laptop GPU. Same 163 questions, same search and checks:
@@ -111,15 +111,15 @@ Qwen3-4B was fine-tuned with a LoRA add-on on 658 answers written by v7 itself, 
 |---|---|---|---|
 | Qwen3-4B, before fine-tuning (judge) | 73.6% | 72.3% | 32.5% |
 | Qwen3-4B + LoRA (judge) | 79.8% | 78.7% | 30.1% |
-| Qwen3-4B + LoRA (hand) | 85.9% | 76.3% | 27.0% |
-| v7, Qwen3-8B + reasoning (hand) | 92.6% | 81.4% | 15.3% |
+| Qwen3-4B + LoRA (ref.) | 85.9% | 76.3% | 27.0% |
+| v7, Qwen3-8B + reasoning (ref.) | 92.6% | 81.4% | 15.3% |
 
 The fine-tuned model is clearly better than the 4B it started from: +6.3 [+1.2, +11.6] points of facts found. It also learned to say when the guides don't answer: it labels 9 of the 11 not-covered questions that way, against 1 before. It does not reach v7: it has nearly twice as much invented content, and Arabic answers are its weak point. So the app keeps v7. Method, the memory tricks needed to train on 8 GB, and detailed results: [`finetune/README.md`](finetune/README.md). The trained add-on is on Hugging Face: [youssef-khazal/qwen3-4b-demarches-lora](https://huggingface.co/youssef-khazal/qwen3-4b-demarches-lora).
 
 ## Honest limits
 - When search misses the right sheet, the assistant can only fall back. About 4% of questions don't get the right sheet in the top 5. For Arabic questions this is 1 in 15.
-- The test set is 163 hand-written questions. That is enough to compare versions, not to give a precise failure rate. Each per-category number rests on a handful of questions.
-- The hand grading was done by one person (with the passages at hand); a second grader would make the invented-content figures more robust.
+- The test set is 163 questions. That is enough to compare versions, not to give a precise failure rate. Each per-category number rests on a handful of questions.
+- The reference grading was done by a single grader, an LLM (Claude) reading every answer against its passages; a human second grader would make the invented-content figures more robust.
 - The judge is itself an 8B model: reliable for behaviour and facts, not for invented content.
 - The assistant gives general information from the official guides. It is not legal advice, and it does not replace the administration or an adviser.
 
@@ -164,7 +164,7 @@ src/fr_admin_assistant/
 scripts/                  corpus building, embeddings, evaluation runs, scoring
 finetune/                 fine-tuning Qwen3-4B with QLoRA: data generation, checks, training
 data/eval/                the 163 test questions, 120 rewordings, 28 follow-up cases
-results/                  every answer, judge verdict and hand grade behind the numbers above
+results/                  every answer, judge verdict and reference grade behind the numbers above
 tests/                    unit tests (no model needed), run on every push
 ```
 

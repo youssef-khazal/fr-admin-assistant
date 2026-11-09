@@ -1,6 +1,6 @@
 # Fine-tuning a smaller model: Qwen3-4B with QLoRA
 
-Can a model half the size learn to answer like the final assistant (v7, Qwen3-8B with reasoning), if it is trained on v7's own answers? This folder is that experiment: synthetic training data made with the assistant itself, a LoRA add-on trained on an 8 GB laptop GPU, and the same evaluation as the main project (163 test questions, LLM judge, hand grading).
+Can a model half the size learn to answer like the final assistant (v7, Qwen3-8B with reasoning), if it is trained on v7's own answers? This folder is that experiment: synthetic training data made with the assistant itself, a LoRA add-on trained on an 8 GB laptop GPU, and the same evaluation as the main project (163 test questions, LLM judge, reference grading).
 
 **Result in short:** the fine-tuned 4B is clearly better than the 4B it started from. It finds more of the expected facts and picks the right behaviour more often, in particular saying "this is not in the guides" when it should. It does **not** reach v7, the 8B model with reasoning. v7 remains the model used by the app.
 
@@ -17,7 +17,7 @@ generated questions ──► search (same as the app) ──► teacher: v7, re
    - *clarify*: the answer depends on a situation the question does not give;
    - *fallback*: the sheet that answers is removed from the passages, so the right reply is "not in the guides".
 
-   28 hand-written off-topic and prompt-injection requests are added. **The 55 sheets that answer the 163 test questions are excluded**, so no test answer is seen in training.
+   28 written off-topic and prompt-injection requests are added. **The 55 sheets that answer the 163 test questions are excluded**, so no test answer is seen in training.
 2. **Search** (phase 2): the app's own search (BM25 + bge-m3 + reranker) picks the 8 passages for each question.
 3. **Teacher** (phase 3): the full v7 assistant answers, with reasoning on and all its checks in code. Its JSON answer is the training target, and the prompt is built exactly as in the app (`Assistant.build_messages`).
 4. **Checks** (`build_sft.py`). An answer is kept only if:
@@ -64,7 +64,7 @@ Same 163 questions as the main project, same search, same prompt and checks in c
 | v7 (Qwen3-8B + reasoning) | 89.0% | 86.6% | 24.5% | ~70 s |
 | fine-tuned − base | +6.1 [0.0, +12.9] | **+6.3 [+1.2, +11.6]** | −2.5 [−10.4, +4.9] | |
 
-**Hand grading** (all 163 answers of the fine-tuned model, same method as v4–v7):
+**Reference grading** (all 163 answers of the fine-tuned model, same method as v4–v7):
 
 | model | right behaviour | facts found | answers with invented content |
 |---|---|---|---|
@@ -83,7 +83,7 @@ Same 163 questions as the main project, same search, same prompt and checks in c
   - the civil-service rule given to a private employee;
   - "17 (SAMU)" in an emergency answer, where 17 is the police and 15 the SAMU.
 - **Arabic is where the small model breaks down.** 10 of the 15 Arabic answers have a wrong detail, against about 1 in 4 in French and English. Examples: a rental-deposit question answered with the rules for buying a new-build home, and one answer that repeats the same sentence. The training set had 56 Arabic examples, too few to fix this.
-- **The judge is less reliable on this model:** it agrees with the hand grading on 85% of behaviour verdicts, 90% of facts and 75% of invented-content verdicts.
+- **The judge is less reliable on this model:** it agrees with the reference grading on 85% of behaviour verdicts, 90% of facts and 75% of invented-content verdicts.
 
 **Decision:** the app keeps v7. The fine-tuned 4B is about 3× faster, but it makes nearly twice as many errors in content, and for administrative information a wrong detail costs more than a slow answer.
 
