@@ -12,7 +12,7 @@ Correction for the LLM judge: it sometimes lists an expected fact that the answe
 counted as invented content when it overlaps strongly with one of the question's expected facts.
 Both the raw and the corrected rates are reported.
 
---manual: grades written by hand in the same format (behaviour_ok, facts, invented_or_wrong) for
+--manual: reference grades (read against the passages by a stronger model) in the same format (behaviour_ok, facts, invented_or_wrong) for
 part of a run, to measure how far the LLM judge can be trusted.
 """
 
@@ -57,7 +57,7 @@ def load_jsonl(path: Path) -> dict[str, dict]:
 
 def grade(j: dict, facts: list[str]) -> dict:
     """One judgement -> behaviour ok, facts found / expected, invented (raw and corrected)."""
-    if "invented_or_wrong" in j:  # hand grading
+    if "invented_or_wrong" in j:  # reference grading
         flagged = j["invented_or_wrong"]
         raw = corrected = bool(flagged)
     else:
@@ -147,9 +147,9 @@ def main() -> None:
         manual = {i: grade(j, questions[i].get("facts") or []) for i, j in load_jsonl(a.manual).items()}
         report["manual"] = summary(list(manual.values()))
         report["judge_vs_manual"] = agreement(runs[last], manual)
-        print(table({f"{last} by hand": report["manual"],
+        print(table({f"{last} reference grading": report["manual"],
                      f"{last} by judge, same questions": summary([runs[last][i] for i in manual if i in runs[last]])},
-                    "hand vs judge"), end="\n\n")
+                    "reference vs judge"), end="\n\n")
         print("agreement judge/hand:", json.dumps(report["judge_vs_manual"]))
     if a.out:
         a.out.write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")

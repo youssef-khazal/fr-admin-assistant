@@ -3,7 +3,7 @@
 # Every question is linked to the official Service-Public sheet(s) that answer it ("gold", the first
 # one is the main sheet; the others are also acceptable) and to the facts a correct answer must
 # contain. Facts were copied from the sheets of the export dated 2026-10-25.
-# After the first search run, the sheets ranked first but not listed were reviewed by hand and
+# After the first search run, the sheets ranked first but not listed were reviewed and
 # added to "gold" when they also answer the question (q030, q039, q067, q068, q077, q093, q144).
 #
 # behaviour:

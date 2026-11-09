@@ -7,7 +7,7 @@ answer must contain, the passages the assistant was given, and the answer. It re
   unsupported    statements in the answer that the passages do not support (invented content)
   wrong          statements that contradict the expected facts
 Asking for each fact separately makes the judge's job simple and checkable. A sample of the
-judge's grades is re-checked by hand to measure how far it can be trusted.
+judge's grades is re-checked against a reference grading to measure how far it can be trusted.
 """
 
 from __future__ import annotations

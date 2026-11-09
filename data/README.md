@@ -21,7 +21,7 @@ The text of the guides is not modified. It is only parsed and split into passage
 ## In git
 | folder | content |
 |---|---|
-| `eval/questions.yaml` | 163 hand-written test questions, with the expected behaviour, the official sheets that answer them and the facts the answer should give |
+| `eval/questions.yaml` | 163 test questions, with the expected behaviour, the official sheets that answer them and the facts the answer should give |
 | `eval/paraphrases.yaml` | 24 of those questions rewritten in 5 styles (120 variants) |
 | `eval/followups.yaml` | 28 cases for the follow-up detector |
 
